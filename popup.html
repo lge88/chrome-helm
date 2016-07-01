@@ -3,7 +3,6 @@
   <head>
     <title>Helm</title>
     <link href="popup.css" rel="stylesheet">
-    <script src="popup.js"></script>
   </head>
   <body>
     <div id="root">
@@ -15,30 +14,22 @@
              spellcheck="false">
 
       <table id="candidates">
-        <tbody>
+        <tbody id="candidates-body"></tbody>
+      </table>
 
-          <tr class="candidate selected">
-            <td class="candidate-thumb" height="40" width="8%" align="center">
-              <img src="https://s.yimg.com/nq/favicons/2/favicons/favicon-no-badge-32x32.png">
-            </td>
-            <td class="candidate-content" height="40" width="92%">
-              <div class="candidate-title">(637 unread) - lige@yahoo-inc.com - Yahoo Mail</div>
-              <div class="candidate-url">https://mg.mail.yahoo.com/neo/launch?.partner=ycorp&.rand=7dpa36nrgnt8j#4292471452 ahttps://mg.mail.yahoo.com/neo/launchhttps://mg.mail.yahoo.com/neo/launchhttps://mg.mail.yahoo.com/neo/launch</div>
-            </td>
-          </tr>
+      <script id="candidate-template" type="x-tmpl-mustache">
+        <tr class="candidate {{selected}}">
+          <td class="candidate-thumb" height="40" width="8%" align="center">
+            <img src="{{thumb}}">
+          </td>
+          <td class="candidate-content" height="40" width="92%">
+            <div class="candidate-title">{{title}}</div>
+            <div class="candidate-url">{{url}}</div>
+          </td>
+        </tr>
+      </script>
 
-          <tr class="candidate">
-            <td height="50" width="8%" align="center">
-              <img class="candidate-thumb" src="https://s.yimg.com/nq/favicons/2/favicons/favicon-no-badge-32x32.png">
-            </td>
-            <td height="50" width="92%">
-              <div class="candidate-title">(637 unread) - lige@yahoo-inc.com - Yahoo Mail</div>
-              <div class="candidate-url">https://mg.mail.yahoo.com/neo/</div>
-            </td>
-          </tr>
-
-        </tbody>
-    </table>
-
+      <script src="mustache.min.js"></script>
+      <script src="popup.js"></script>
   </body>
 </html>

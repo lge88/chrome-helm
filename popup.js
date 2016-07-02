@@ -22,10 +22,15 @@ function escapeRegex(str) {
 
 function filterCandidate(query, candidate) {
   if (query === '') return true;
-  query = escapeRegex(query);
-  let re = new RegExp(query, "i");
-  return candidate.title.search(re) >= 0 ||
-    candidate.url.search(re) >= 0;
+
+  function filterToken(token) {
+    token = escapeRegex(token);
+    let re = new RegExp(token, "i");
+    return candidate.title.search(re) >= 0 ||
+      candidate.url.search(re) >= 0;
+  }
+
+  return query.split(/\s+/).every(filterToken);
 }
 
 function updateCandidates(callback) {

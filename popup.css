@@ -41,6 +41,11 @@ tr.candidate {
   padding: 5px;
 }
 
+.candidate-thumb > img {
+  width: 80%;
+  height: auto;
+}
+
 .candidate-title, .candidate-url {
   overflow: hidden;
   white-space: nowrap;

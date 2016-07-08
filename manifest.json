@@ -18,7 +18,8 @@
   "permissions": [
     "tabs",
     "history",
-    "bookmarks"
+    "bookmarks",
+    "http://www.google.com/"
   ],
 
   "commands": {

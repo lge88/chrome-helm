@@ -47,6 +47,13 @@ function updateCandidates(callback) {
       }
       if (candidates.length >= maxNumCandidates) break;
     }
+
+    // getGoogleSuggestionCandidates(query, function(items) {
+    //   candidates = candidates.concat(items);
+    //   console.log('items', items);
+    //   callback();
+    // });
+
     callback();
   });
 }
@@ -117,6 +124,29 @@ function gotoSelectedTabOrSearch() {
   selectedIndex = 0;
   document.querySelector('#search-box').value = '';
   update();
+}
+
+function parseXml(xmlStr) {
+  return (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
+}
+
+function getGoogleSuggestionCandidates(query, callback) {
+  const endpoint = 'http://www.google.com/complete/search?output=toolbar&q='
+  fetch(endpoint + encodeURIComponent(query))
+    .then(resp => resp.text())
+    .then(xml => parseXml(xml))
+    .then((doc) => {
+      let items = [];
+      doc.querySelectorAll('suggestion')
+        .forEach((x) => {
+          const candidate = {
+            title: x.getAttribute('data')
+          };
+          items.push(candidate);
+        });
+      callback(items);
+    })
+    .catch((err) => callback([]));
 }
 
 // Hacky, updated current window { focused: false } won't work.

@@ -35,6 +35,7 @@ function filterCandidate(query, candidate) {
 
 function updateCandidates(callback) {
   let query = document.querySelector('#search-box').value;
+  selectedIndex = 0;
   candidates = [];
 
   chrome.tabs.query({}, function(aTabs) {

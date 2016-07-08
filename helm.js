@@ -93,7 +93,7 @@ function nextCandidate() {
   }
 }
 
-function gotoSelectedTab() {
+function gotoSelectedTabOrSearch() {
   const selected = candidates[selectedIndex];
   if (selected) {
     chrome.tabs.update(selected.tab.id, {
@@ -103,21 +103,55 @@ function gotoSelectedTab() {
     chrome.windows.update(selected.tab.windowId, {
       focused: true
     });
-    // restore state
+  } else {
+    let query = document.querySelector('#search-box').value;
+    getLastFocused(function(win) {
+      chrome.tabs.create({
+        url: 'https://www.google.com/search?q=' + encodeURIComponent(query) +
+          '&sourceid=chrome&ie=UTF-8'
+      });
+    });
   }
+
+  // restore state
+  selectedIndex = 0;
+  document.querySelector('#search-box').value = '';
+  update();
+}
+
+// Hacky, updated current window { focused: false } won't work.
+function getLastFocused(callback) {
+  chrome.windows.getAll({ populate: true }, function(wins) {
+    for (let i = 0; i < wins.length; ++i) {
+      if (wins[i].tabs.length > 0 && wins[i].tabs[0].title !== 'Chrome Helm') {
+        callback(wins[i]);
+        return;
+      }
+    }
+    callback(null);
+  });
+}
+
+function gotoLastFocused() {
+  getLastFocused(function(win) {
+    chrome.windows.update(win.id, { focused: true });
+  });
 }
 
 function runAction(e) {
   console.log('key', e);
   if (e.keyCode === 13) {
     // Enter key, goto selected tap
-    gotoSelectedTab();
+    gotoSelectedTabOrSearch();
   } else if (e.keyCode === 38 || (e.ctrlKey && e.keyCode === 80)) {
     // Up key or Ctrl-p
     prevCandidate();
   } else if (e.keyCode === 40 || (e.ctrlKey && e.keyCode === 78)) {
     // Down key or Ctrl-n
     nextCandidate();
+  } else if (e.keyCode === 27) {
+    // Escape
+    gotoLastFocused();
   }
 }
 

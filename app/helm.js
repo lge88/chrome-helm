@@ -1,3 +1,5 @@
+const Mustache = require('mustache');
+
 var candidateTemplate;
 var selectedIndex = 0;
 var maxNumCandidates = 20;
@@ -25,7 +27,7 @@ function filterCandidate(query, candidate) {
 
   function filterToken(token) {
     token = escapeRegex(token);
-    let re = new RegExp(token, "i");
+    const re = new RegExp(token, "i");
     return candidate.title.search(re) >= 0 ||
       candidate.url.search(re) >= 0;
   }
@@ -34,7 +36,7 @@ function filterCandidate(query, candidate) {
 }
 
 function updateCandidates(callback) {
-  let query = document.querySelector('#search-box').value;
+  const query = document.querySelector('#search-box').value;
   selectedIndex = 0;
   candidates = [];
 
@@ -50,7 +52,6 @@ function updateCandidates(callback) {
 
     // getGoogleSuggestionCandidates(query, function(items) {
     //   candidates = candidates.concat(items);
-    //   console.log('items', items);
     //   callback();
     // });
 
@@ -169,7 +170,6 @@ function gotoLastFocused() {
 }
 
 function runAction(e) {
-  console.log('key', e);
   if (e.keyCode === 13) {
     // Enter key, goto selected tap
     gotoSelectedTabOrSearch();

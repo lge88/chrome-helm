@@ -1,26 +1,24 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class SearchBox extends Component {
-
-  static propTypes = {
+  handleChange = (event) => {
+    this.props.onChange({ query: event.target.value });
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-    };
-  }
-
 	render() {
+    const { query } = this.props;
 		return (
-			<input id="search-box"
-      type="text"
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="off"
-      autofocus
-      spellcheck="false" />
+			<input
+          className="search-box"
+          type="text"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          autoFocus={true}
+          spellCheck="false"
+          value={query}
+          onChange={this.handleChange}
+      />
 		);
 	}
-
 }

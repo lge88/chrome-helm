@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// import App from './components/App';
-// ReactDOM.render(
-//   <App/>,
-//   document.querySelector('#root')
-// );
+import App from './components/App';
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root')
+);
 
 // import CandidateItem from './components/CandidateItem';
 // ReactDOM.render(
@@ -30,14 +29,28 @@ import ReactDOM from 'react-dom';
 //   document.querySelector('#root')
 // );
 
-import CandidateGroupList from './components/CandidateGroupList';
-import candidateGroups from './candidate-groups.json';
-console.log('candidates groups', candidateGroups);
+// import CandidateGroupList from './components/CandidateGroupList';
+// import candidateGroups from './candidate-groups.json';
+// console.log('candidates groups', candidateGroups);
 
-ReactDOM.render(
-  <CandidateGroupList
-      groups = {candidateGroups}
-      selections = {[ [0,2,3], [1], [] ]}
-  />,
-  document.querySelector('#root')
-);
+// ReactDOM.render(
+//   <CandidateGroupList
+//       groups = {candidateGroups}
+//       selections = {[ [0,2,3], [1], [] ]}
+//   />,
+//   document.querySelector('#root')
+// );
+
+// import SearchBox from './components/SearchBox';
+
+// function onChange(e) {
+//   console.log('changed', e);
+// }
+
+// ReactDOM.render(
+//   <SearchBox
+//       query="hello"
+//       onChange={onChange}
+//   />,
+//   document.querySelector('#root')
+// );

@@ -23,11 +23,11 @@ html, body {
 }
 
 .candidate-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.0em;
 }
 
 .candidate-group-name {
-  font-size: 14pt;
+  font-size: 10pt;
   font-style: italic;
 }
 
@@ -39,14 +39,13 @@ html, body {
   border-spacing: 0 2px;
 }
 
-tr.candidate {
-  border: none;
-  padding: 5px;
+td.candidate-thumb {
+  text-align: center;
 }
 
 .candidate-thumb > img {
-  width: 80%;
-  height: auto;
+  height: 100%;
+  width: auto;
 }
 
 .candidate-title, .candidate-url {
@@ -54,7 +53,7 @@ tr.candidate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 3px 0;
+  padding: 2px 0;
 }
 
 .candidate-title {

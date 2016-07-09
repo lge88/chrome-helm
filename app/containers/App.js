@@ -6,6 +6,10 @@ import CandidateGroupList from '../components/CandidateGroupList';
 import * as HelmActions from '../actions/helm';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.actions.search('');
+  }
+
   render() {
     const { query, groups, selections, actions } = this.props;
     return (

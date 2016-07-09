@@ -10,6 +10,11 @@ const actionsMap = {
   [ActionTypes.UPDATE_QUERY](state, action) {
     const { query } = action;
     return { ...state, query };
+  },
+
+  [ActionTypes.UPDATE_GROUP](state, action) {
+    const { group, candidates } = action;
+    return { ...state, groups: [ { name: group, candidates } ] };
   }
 };
 

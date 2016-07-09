@@ -14,7 +14,21 @@ const actionsMap = {
 
   [ActionTypes.UPDATE_GROUP](state, action) {
     const { group, candidates } = action;
-    return { ...state, groups: [ { name: group, candidates } ] };
+    const { groups } = state;
+    let newGroups = [ ...groups ];
+    let i = 0, len = newGroups.length;
+    for (; i < len; ++i) {
+      if (newGroups[i].name === group) break;
+    }
+
+    const updatedGroup = { name: group, candidates };
+    if (i >= len) {
+      newGroups.push(updatedGroup);
+    } else {
+      newGroups[i] = updatedGroup;
+    }
+
+    return { ...state, groups: newGroups };
   }
 };
 

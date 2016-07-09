@@ -5,12 +5,14 @@ import createStore from './store/configureStore';
 
 const initialState = {
   query: '',
-  groups: require('./candidate-groups.json'),
-  selections: [
-    [0, 2, 3],
-    [1],
-    []
-  ]
+  groups: [],
+  selections: [],
+  /* groups: require('./candidate-groups.json'),
+   * selections: [
+   *   [0, 2, 3],
+   *   [1],
+   *   []
+   * ]*/
 };
 
 ReactDOM.render(

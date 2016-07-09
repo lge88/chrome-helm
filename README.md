@@ -58,15 +58,17 @@ Unique. It will be used as key in a dictionary.
 Examine the candidate list, descide whether this action can be ran. If it returns `false`, the action won't be presented in the action selection UI.
 
 ### Session
-A helm session is unique defined by:
-- The name of the session.
-- A ordered list of `Source`.
-- A ordered lsit of `Action`.
+In a helm session user first incrementally select candidate(s) to act on, then select the action to run. All predefined helm sessions is under `app/helm/sessions`.
+- `name: String` (required): The unique name of the session.
+- `displayedName: String` (optional): The display name of the session, will be used in UI. If not specified, `name` will be used.
+- `sources: [String]` (required): A list of source names. Search result will presented in the order of source in the this list.
+- `actions: [String]` (required): A list of available action names. Action choices will presented in the order of source in the this list.
 
-Following is an example:
+Example:
 ```
 {
-  "name": "Find web page",
+  "name": "findWebPage",
+  "displayedName": "Find web page",
   "sources": [
     "tabs",
     "bookmarks",
@@ -79,6 +81,7 @@ Following is an example:
   ]
 }
 ```
+
 
 
 

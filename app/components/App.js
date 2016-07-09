@@ -22,19 +22,19 @@ export default class App extends Component {
     this.setState({ query: delta.query });
   };
 
-	render() {
-		return (
-			<div>
-			  <SearchBox
+  render() {
+    return (
+      <div>
+        <SearchBox
             query = {this.state.query}
             onChange = { this.handleChange }
         />
-			  <CandidateGroupList
+        <CandidateGroupList
             groups = {this.state.groups}
             selections = { this.state.selections }
         />
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 
 }

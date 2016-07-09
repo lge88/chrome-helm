@@ -2,11 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import CandidateItem from './CandidateItem';
 
 export default class CandidateGroup extends Component {
-	renderCandidates() {
-		const { name, selectedIndices, candidates } = this.props;
-		return candidates.map((candidate, i) => {
+  renderCandidates() {
+    const { name, selectedIndices, candidates } = this.props;
+    return candidates.map((candidate, i) => {
       const key = name + '-' + i;
-			return (
+      return (
         <CandidateItem
             key = {key}
             selected = {selectedIndices.indexOf(i) != -1}
@@ -16,20 +16,20 @@ export default class CandidateGroup extends Component {
         />
       );
     });
-	}
+  }
 
-	render() {
+  render() {
     const { name } = this.props;
-		return (
+    return (
       <div className="candidate-group">
         <div className="candidate-group-name">{name}</div>
-			  <table className = "candidate-group-table">
-			    <tbody>
-			      { this.renderCandidates() }
-				  </tbody>
-			  </table>
+        <table className = "candidate-group-table">
+          <tbody>
+            { this.renderCandidates() }
+          </tbody>
+        </table>
       </div>
-		);
-	}
+    );
+  }
 
 }

@@ -5,10 +5,10 @@ export default class SearchBox extends Component {
     this.props.onChange({ query: event.target.value });
   };
 
-	render() {
+  render() {
     const { query } = this.props;
-		return (
-			<input
+    return (
+      <input
           className="search-box"
           type="text"
           autoComplete="off"
@@ -19,6 +19,6 @@ export default class SearchBox extends Component {
           value={query}
           onChange={this.handleChange}
       />
-		);
-	}
+    );
+  }
 }

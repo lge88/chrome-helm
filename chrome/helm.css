@@ -4,7 +4,7 @@ html, body {
   margin: 0;
 }
 
-#root, .search-box, .candidate-group-name, .candidate-group {
+#root, .search-box, .candidate-group-name, .candidate-group-table {
   width: 100%;
   -webkit-box-sizing: border-box;
 }
@@ -22,12 +22,16 @@ html, body {
   padding: 0.3em;
 }
 
+.candidate-group {
+  margin-bottom: 20px;
+}
+
 .candidate-group-name {
   font-size: 14pt;
   font-style: italic;
 }
 
-.candidate-group {
+.candidate-group-table {
   margin-top: 5px;
   table-layout: fixed;
   font-size: 12pt;

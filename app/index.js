@@ -18,20 +18,8 @@ import ReactDOM from 'react-dom';
 //   document.body
 // );
 
-import CandidateGroup from './components/CandidateGroup';
-import candidates from './candidates.json';
-
-ReactDOM.render(
-  <CandidateGroup
-      name = "Opened Tabs"
-      candidates = {candidates}
-      selectedIndices = {[0,2,3]}
-  />,
-  document.querySelector('#root')
-);
-
-// import CandidateGroupList from './components/CandidateGroupList';
-// import candidateGroups from './candidate-groups.json';
+// import CandidateGroup from './components/CandidateGroup';
+// import candidates from './candidates.json';
 
 // ReactDOM.render(
 //   <CandidateGroup
@@ -41,3 +29,15 @@ ReactDOM.render(
 //   />,
 //   document.querySelector('#root')
 // );
+
+import CandidateGroupList from './components/CandidateGroupList';
+import candidateGroups from './candidate-groups.json';
+console.log('candidates groups', candidateGroups);
+
+ReactDOM.render(
+  <CandidateGroupList
+      groups = {candidateGroups}
+      selections = {[ [0,2,3], [1], [] ]}
+  />,
+  document.querySelector('#root')
+);

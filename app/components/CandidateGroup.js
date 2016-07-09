@@ -21,9 +21,9 @@ export default class CandidateGroup extends Component {
 	render() {
     const { name } = this.props;
 		return (
-      <div>
+      <div className="candidate-group">
         <div className="candidate-group-name">{name}</div>
-			  <table className = "candidate-group">
+			  <table className = "candidate-group-table">
 			    <tbody>
 			      { this.renderCandidates() }
 				  </tbody>

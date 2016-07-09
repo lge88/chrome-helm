@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Opened Tabs",
+    "candidates": [
+      {
+        "title": "(368 unread) - lige@yahoo-inc.com - Yahoo Mail",
+        "url": "https://mg.mail.yahoo.com/neo/launch?.partner=ycorp#5279277243",
+        "thumb": "https://s.yimg.com/nq/favicons/1/favicons/favicon-badge-32x32.png"
+      },
+      {
+        "title": "Add 5417213 and others to boost by lige · Pull Request #201 · Curveball/mappi-ranker",
+        "url": "https://git.corp.yahoo.com/Curveball/mappi-ranker/pull/201/files",
+        "thumb": "https://git.corp.yahoo.com/favicon-enterprise.ico"
+      },
+      {
+        "title": "Extensions",
+        "url": "chrome://extensions/?id=fmkadmapgofadopljbjfkapdkoienihi",
+        "thumb": "chrome://theme/IDR_EXTENSIONS_FAVICON@2x"
+      },
+      {
+        "title": "React Developer Tools - Chrome Web Store",
+        "url": "https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi",
+        "thumb": "https://www.google.com/images/icons/product/chrome_web_store-32.png"
+      }
+    ]
+  },
+  {
+    "name": "Bookmarks",
+    "candidates": [
+      {
+        "title": "janl/mustache.js: Minimal templating with {{mustaches}} in JavaScript",
+        "url": "https://github.com/janl/mustache.js",
+        "thumb": "https://assets-cdn.github.com/favicon.ico"
+      },
+      {
+        "title": "webpack UglifyJs es6 - Google Search",
+        "url": "https://www.google.com/search?q=webpack+optimize+es6&oq=webpack+optimize+es6&aqs=chrome..69i57.6807j0j7&sourceid=chrome&ie=UTF-8#q=webpack+UglifyJs+es6",
+        "thumb": "https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
+      }
+    ]
+  },
+  {
+    "name": "History",
+    "candidates": [
+      {
+        "title": "Getting Started | React",
+        "url": "https://facebook.github.io/react/docs/getting-started.html",
+        "thumb": "https://facebook.github.io/react/favicon.ico"
+      },
+      {
+        "title": "Reusable Components | React",
+        "url": "https://facebook.github.io/react/docs/reusable-components.html",
+        "thumb": "https://facebook.github.io/react/favicon.ico"
+      },
+      {
+        "title": "Configuring web-mode with JSX · Prathamesh Sonpatki",
+        "url": "http://cha1tanya.com/2015/06/20/configuring-web-mode-with-jsx.html",
+        "thumb": "http://cha1tanya.com/public/favicon.ico"
+      }
+    ]
+  }
+]

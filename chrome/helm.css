@@ -4,7 +4,7 @@ html, body {
   margin: 0;
 }
 
-#root, #search-box, #candidates {
+#root, .search-box, .candidate-group-name, .candidate-group {
   width: 100%;
   -webkit-box-sizing: border-box;
 }
@@ -13,7 +13,7 @@ html, body {
   padding: 10px;
 }
 
-#search-box {
+.search-box {
   height: 2.0em;
   font-size: 16pt;
   border: 1px solid;
@@ -22,7 +22,12 @@ html, body {
   padding: 0.3em;
 }
 
-#candidates {
+.candidate-group-name {
+  font-size: 14pt;
+  font-style: italic;
+}
+
+.candidate-group {
   margin-top: 5px;
   table-layout: fixed;
   font-size: 12pt;

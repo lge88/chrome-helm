@@ -26,10 +26,10 @@ class Session {
 
   search(query, options, onUpdate) {
     this._sources.forEach(source => {
-      const name = source.klass.displayedName || source.klass.key;
       source.instance.search(query, {}, candidates => {
         onUpdate({
-          source: name,
+          sourceName: source.klass.key,
+          displayedName: source.klass.displayedName,
           candidates
         });
       });

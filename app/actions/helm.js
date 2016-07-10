@@ -8,10 +8,14 @@ export function search(query) {
     const { currentSessionName } = getState();
 
     helm.search(currentSessionName, query, {}, searchResult => {
-      const { source, candidates } = searchResult;
-      dispatch({ type: types.UPDATE_GROUP, group: source, candidates });
+      const { sourceName, displayedName, candidates } = searchResult;
+      dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
     });
   };
 
   return fn;
+}
+
+export function loadState(stateName) {
+  return { type: types.LOAD_STATE, stateName };
 }

@@ -2,25 +2,28 @@ import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SearchBox from '../components/SearchBox';
-import CandidateGroupList from '../components/CandidateGroupList';
+import SourceList from '../components/SourceList';
 import * as HelmActions from '../actions/helm';
 
 class App extends Component {
   componentDidMount() {
     this.props.actions.search('');
+    // this.props.actions.loadState('state01');
   }
 
   render() {
-    const { query, groups, selections, actions } = this.props;
+    const { query, sourceNames, resultsBySourceName, cursor, multiSelections, actions } = this.props;
     return (
       <div>
         <SearchBox
             query = { query }
             onChange = { actions.search }
         />
-        <CandidateGroupList
-            groups = { groups }
-            selections = { selections }
+        <SourceList
+            sourceNames = { sourceNames }
+            resultsBySourceName = { resultsBySourceName }
+            cursor = { cursor }
+            multiSelections = { multiSelections }
         />
       </div>
     );

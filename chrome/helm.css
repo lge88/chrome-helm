@@ -72,3 +72,11 @@ td.candidate-thumb {
 .candidate.selected {
   background-color: #cccccc;
 }
+
+.candidate.marked {
+  background-color: yellow;
+}
+
+.candidate.marked.selected {
+  background-color: red;
+}

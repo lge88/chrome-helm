@@ -5,10 +5,11 @@ const thumbWidthPercent = 6;
 
 class CandidateItem extends Component {
   render() {
-    const { selected, thumb, title, url } = this.props;
+    const { selected, marked, thumb, title, url } = this.props;
 
     let rowCls = 'candidate';
     if (selected) rowCls += ' selected';
+    if (marked) rowCls += ' marked';
     return (
       <tr className={rowCls}>
         <td className="candidate-thumb"

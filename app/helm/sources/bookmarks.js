@@ -47,14 +47,6 @@ export class BookmarkSource {
     // update this._bookmarks
   }
 
-  getName() {
-    return 'bookmarks';
-  }
-
-  getDisplayedName() {
-    return 'Bookmarks';
-  }
-
   search(query, options, callback) {
     const candidates = this._bookmarks.filter(filterCandidate.bind(null, query));
     callback(candidates);

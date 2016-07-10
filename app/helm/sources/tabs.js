@@ -30,16 +30,7 @@ export class TabSource {
   static key = 'tabs';
   static displayedName = 'Browser Tabs';
 
-  constructor(options) {
-  }
-
-  getName() {
-    return 'tabs';
-  }
-
-  getDisplayedName() {
-    return 'Browser Tabs';
-  }
+  constructor(options) {}
 
   search(query, options, callback) {
     chrome.tabs.query({}, function(aTabs) {
@@ -56,6 +47,5 @@ export class TabSource {
     });
   }
 
-  destory() {
-  }
+  destory() {}
 }

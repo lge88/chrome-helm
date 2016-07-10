@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Root from './containers/Root';
+import createStore from './store/configureStore';
+
+const initialState = {
+  currentSessionName: 'findTab',
+  query: '',
+  groups: [],
+  selections: [],
+  /* groups: require('./candidate-groups.json'),
+   * selections: [
+   *   [0, 2, 3],
+   *   [1],
+   *   []
+   * ]*/
+};
+
 ReactDOM.render(
-  <App />,
+  <Root store = {createStore(initialState)} />,
   document.querySelector('#root')
 );
 

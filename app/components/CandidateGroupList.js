@@ -5,7 +5,9 @@ export default class CandidateGroupList extends Component {
   renderCandidateGroups() {
     const { selections, groups } = this.props;
     return groups.map((group, i) => {
-      const selectedIndices = selections[i];
+      let selectedIndices = selections[i];
+      if (typeof selectedIndices === "undefined") selectedIndices = [];
+
       const { name, candidates } = group;
       return (
         <CandidateGroup

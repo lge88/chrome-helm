@@ -12,7 +12,7 @@ A helm candidate is an object representing the item to find. The following attri
 - `detail: String` (optional)
 
 A candidate must also present:
-- `source: String` (required): The name of source (consistent with `Source::getName()`) that generates this candidate. 
+- `source: String` (required): The name of source (consistent with `Source::getName()`) that generates this candidate.
 
 Other than above attributes, a candidate can cantain other optional data fields in order to interact with `Action`. Following is an example candidate (a bookmark item):
 ```
@@ -20,13 +20,15 @@ Other than above attributes, a candidate can cantain other optional data fields 
   "title": "GitHub",
   "thumb": "https://github.global.ssl.fastly.net/favicon.ico",
   "detail": "https://github.com/",
-  "source": "bookmakrs",
+  "source": "bookmarks",
   "created_time": 1468085042
 }
 ```
 
 ### Source
 A helm source is an object provides a list of candidate under query. All helm sources is placed under `app/helm/sources` folder. A helm source might implement following methods:
+
+#### `constructor(options: Object) => void` (optional)
 
 #### `getName() => String` (required)
 Unique. It will be used as key in a dictionary.
@@ -37,9 +39,6 @@ Unique. It will be used as key in a dictionary.
 
 #### `getDisplayedName() => String` (optional)
 By default it is the same as `getName()`. It will be used in UI.
-
-#### `bootstrap(options: Object) => void` (optional)
-This method is call when source is activated.
 
 #### `destroy() => void` (optional)
 This method is call when source is deactivated.
@@ -62,7 +61,7 @@ In a helm session user first incrementally select candidate(s) to act on, then s
 - `name: String` (required): The unique name of the session.
 - `displayedName: String` (optional): The display name of the session, will be used in UI. If not specified, `name` will be used.
 - `sources: [String]` (required): A list of source names. Search result will presented in the order of source in the this list.
-- `actions: [String]` (required): A list of available action names. Action choices will presented in the order of source in the this list.
+- `actions: [String]` (required): A list of available action names. Action choices will presented in the order of source in the this list. Default action is the first action in the list.
 
 Example:
 ```
@@ -81,9 +80,3 @@ Example:
   ]
 }
 ```
-
-
-
-
-
-

@@ -1,7 +1,12 @@
-import { getTabCandidates } from './tabs';
-import { getBookmarkCandidates } from './bookmarks';
+import { sources } from './sources';
 
-module.exports = {
-  getTabCandidates,
-  getBookmarkCandidates
-};
+export function search(query, options, onUpdate) {
+  sources.forEach(source => {
+    source.search(query, {}, candidates => {
+      onUpdate({
+        source: source.getDisplayedName(),
+        candidates
+      });
+    });
+  });
+}

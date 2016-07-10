@@ -26,17 +26,33 @@ function filterCandidate(query, candidate) {
   return query.split(/\s+/).every(filterToken);
 }
 
-export function getTabCandidates(query, options, callback) {
-  chrome.tabs.query({}, function(aTabs) {
-    let candidates = [];
-    for (let i = 0, len = aTabs.length; i < len; ++i) {
-      let tab = aTabs[i];
-      let candidate = createTabCandidate(tab);
-      if (filterCandidate(query, candidate)) {
-        candidates.push(candidate);
+export class TabSource {
+  constructor(options) {
+  }
+
+  getName() {
+    return 'tabs';
+  }
+
+  getDisplayedName() {
+    return 'Browser Tabs';
+  }
+
+  search(query, options, callback) {
+    chrome.tabs.query({}, function(aTabs) {
+      let candidates = [];
+      for (let i = 0, len = aTabs.length; i < len; ++i) {
+        const tab = aTabs[i];
+        const candidate = createTabCandidate(tab);
+        if (filterCandidate(query, candidate)) {
+          candidates.push(candidate);
+        }
+        if (candidates.length >= maxNumCandidates) break;
       }
-      if (candidates.length >= maxNumCandidates) break;
-    }
-    callback(candidates);
-  });
+      callback(candidates);
+    });
+  }
+
+  destory() {
+  }
 }

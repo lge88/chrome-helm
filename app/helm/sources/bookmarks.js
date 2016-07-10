@@ -35,6 +35,9 @@ function flatten(bookmarks, node) {
 }
 
 export class BookmarkSource {
+  static key = 'bookmarks';
+  static displayedName = 'Bookmarks';
+
   constructor(options) {
     this._bookmarks = [];
     const iter = flatten.bind(null, this._bookmarks);

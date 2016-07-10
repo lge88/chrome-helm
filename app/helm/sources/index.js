@@ -1,8 +1,7 @@
 import { TabSource } from './tabs';
 import { BookmarkSource } from './bookmarks';
 
-// TODO: move to sessions
-export const sources = [
-  new TabSource(),
-  new BookmarkSource()
-];
+export const sources = {
+  [TabSource.key]: TabSource,
+  [BookmarkSource.key]: BookmarkSource
+};

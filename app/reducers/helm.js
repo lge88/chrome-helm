@@ -1,6 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
 const initialState = {
+  currentSessionName: 'findWebPage',
   query: '',
   groups: null,
   selections: []

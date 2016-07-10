@@ -4,6 +4,7 @@ import Root from './containers/Root';
 import createStore from './store/configureStore';
 
 const initialState = {
+  currentSessionName: 'findTab',
   query: '',
   groups: [],
   selections: [],

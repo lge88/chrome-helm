@@ -5,7 +5,9 @@ export function search(query) {
   const fn = (dispatch, getState) => {
     dispatch({ type: types.UPDATE_QUERY, query });
 
-    helm.search(query, {}, searchResult => {
+    const { currentSessionName } = getState();
+
+    helm.search(currentSessionName, query, {}, searchResult => {
       const { source, candidates } = searchResult;
       dispatch({ type: types.UPDATE_GROUP, group: source, candidates });
     });

@@ -30,15 +30,15 @@ A helm source is an object provides a list of candidate under query. All helm so
 
 #### `constructor(options: Object) => void` (optional)
 
-#### `getName() => String` (required)
+#### `static key: String` (required)
 Unique. It will be used as key in a dictionary.
 
 #### `search(query: String, options: Object, callback: Function) => void` (required)
 `callback` has a signature of `(candidates: [Candidate]) => void`. Possible fields in `options` are:
 - `limit: Int`: return no more that `limit` items.
 
-#### `getDisplayedName() => String` (optional)
-By default it is the same as `getName()`. It will be used in UI.
+#### `static displayedName: String` (optional)
+It will be used in UI, use `key` if it is not specified.
 
 #### `destroy() => void` (optional)
 This method is call when source is deactivated.

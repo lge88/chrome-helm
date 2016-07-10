@@ -27,6 +27,9 @@ function filterCandidate(query, candidate) {
 }
 
 export class TabSource {
+  static key = 'tabs';
+  static displayedName = 'Browser Tabs';
+
   constructor(options) {
   }
 

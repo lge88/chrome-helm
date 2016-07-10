@@ -1,12 +1,8 @@
-import { sources } from './sources';
+import * as sessions from './sessions';
 
-export function search(query, options, onUpdate) {
-  sources.forEach(source => {
-    source.search(query, {}, candidates => {
-      onUpdate({
-        source: source.getDisplayedName(),
-        candidates
-      });
-    });
-  });
+export function search(sessionName, query, options, onUpdate) {
+  const session = sessions[sessionName];
+  if (session) {
+    session.search(query, options, onUpdate);
+  }
 }

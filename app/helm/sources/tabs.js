@@ -15,12 +15,12 @@ export class TabSource {
   static displayedName = 'Browser Tabs';
 
   static defaultOptions = {
-    limit: 10,
+    limit: 100,
     searchableAttributes: [ 'title', 'url' ]
   };
 
   constructor(options) {
-    this._options = { ...TabSource.defaultOptions, options };
+    this._options = { ...TabSource.defaultOptions, ...options };
 
     const { searchableAttributes } = this._options;
     this._matcher = new AttributeMatcher(searchableAttributes);
@@ -28,7 +28,7 @@ export class TabSource {
 
   search(query, options, callback) {
     const filter = this._matcher.test.bind(this._matcher, query);
-    const { limit } = { ...this._options, options };
+    const { limit } = { ...this._options, ...options };
     chrome.tabs.query({}, (aTabs) => {
       let candidates = [];
       for (let i = 0, len = aTabs.length; i < len; ++i) {

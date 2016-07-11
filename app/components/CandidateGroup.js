@@ -3,10 +3,12 @@ import CandidateItem from './CandidateItem';
 
 export default class CandidateGroup extends Component {
   renderCandidates() {
-    const { name, selectedIndex, markedIndexMap, candidates } = this.props;
-    return candidates.map((candidate, i) => {
+    const { name, selectedIndex, markedIndexMap, candidates, limit } = this.props;
+    let els = [];
+    for (let i = 0, len = candidates.length; i < len; ++i) {
+      const candidate = candidates[i];
       const key = name + '-' + i;
-      return (
+      els.push(
         <CandidateItem
             key = { key }
             selected = { selectedIndex === i }
@@ -16,7 +18,10 @@ export default class CandidateGroup extends Component {
             url = { candidate.url }
         />
       );
-    });
+      if (els.length >= limit) break;
+    }
+
+    return els;
   }
 
   render() {

@@ -17,8 +17,10 @@ export class GoogleSuggestSource {
   }
 
   search(query, options, callback) {
+    if (!query) return callback([]);
+
     const { suggestEndpoint, searchEndpoint, limit } = { ...this._options, options };
-    fetch(suggestEndpoint + encodeURIComponent(query))
+    return fetch(suggestEndpoint + encodeURIComponent(query))
       .then(resp => resp.text())
       .then(xml => parseXml(xml))
       .then((doc) => {

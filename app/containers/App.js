@@ -14,7 +14,16 @@ class App extends Component {
   }
 
   render() {
-    const { query, sourceNames, resultsBySourceName, cursor, multiSelections, actions } = this.props;
+    const {
+      query,
+      currentSessionDisplayedName,
+      sourceNames,
+      resultsBySourceName,
+      cursor,
+      multiSelections,
+      actions
+    } = this.props;
+    document.title = `Helm Session: ${currentSessionDisplayedName}`;
     return (
       <div>
         <SearchBox

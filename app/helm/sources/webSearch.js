@@ -11,12 +11,14 @@ export class WebSearchSource {
   }
 
   search(query, options, callback) {
+    if (!query) return callback([]);
+
     const { searchEndpoint } = { ...this._options, options };
     const candidate = {
       title: query,
       url: searchEndpoint + encodeURIComponent(query)
     };
-    callback([ candidate ]);
+    return callback([ candidate ]);
   }
 
   destory() {}

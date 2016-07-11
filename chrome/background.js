@@ -1,6 +1,6 @@
 function createOrShowHelmWindow() {
   chrome.tabs.query({
-    title: 'Chrome Helm'
+    title: 'Helm Session: *'
   }, (tabs) => {
     console.log('tabs', tabs);
     if (tabs.length > 0) {

@@ -25,12 +25,15 @@ export class BookmarkSource {
   static displayedName = 'Bookmarks';
 
   static defaultOptions = {
-    limit: 10
+    limit: 10,
+    searchableAttributes: [ 'title', 'url' ]
   };
 
   constructor(options) {
     this._options = { ...BookmarkSource.defaultOptions, options };
-    this._matcher = new AttributeMatcher([ 'title', 'url' ]);
+
+    const { searchableAttributes } = this._options;
+    this._matcher = new AttributeMatcher(searchableAttributes);
 
     this._bookmarks = [];
     const iter = flatten.bind(null, this._bookmarks);
@@ -46,7 +49,8 @@ export class BookmarkSource {
     let candidates = [];
     for (let i = 0, len = this._bookmarks.length; i < len; ++i) {
       const candidate = this._bookmarks[i];
-      if (filter(candidate) && candidates.length < limit) candidates.push(candidate);
+      if (filter(candidate)) candidates.push(candidate);
+      if (candidates.length >= limit) break;
     }
     callback(candidates);
   }

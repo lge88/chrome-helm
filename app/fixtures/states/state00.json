@@ -1,5 +1,6 @@
 {
   "currentSessionName": "findWebPage",
+  "currentSessionDisplayedName": "Find web apge",
   "query": "",
   "sourceNames": [ "tabs", "bookmarks" ],
   "resultsBySourceName": {},

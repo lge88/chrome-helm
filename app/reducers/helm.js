@@ -21,6 +21,11 @@ const actionsMap = {
     const resultsBySourceName = clone(state.resultsBySourceName);
     resultsBySourceName[sourceName] = { displayedName, candidates };
     return { ...state, resultsBySourceName };
+  },
+
+  [ActionTypes.UPDATE_SESSION](state, action) {
+    const { currentSessionName, currentSessionDisplayedName, sourceNames } = action;
+    return { ...state, currentSessionName, currentSessionDisplayedName, sourceNames };
   }
 };
 

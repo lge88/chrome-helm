@@ -7,7 +7,9 @@ import * as HelmActions from '../actions/helm';
 
 class App extends Component {
   componentDidMount() {
-    this.props.actions.search('');
+    // this.props.actions.search('');
+    this.props.actions.selectSession('findWebPage');
+    // this.props.actions.selectSession('findTab');
     // this.props.actions.loadState('state01');
   }
 

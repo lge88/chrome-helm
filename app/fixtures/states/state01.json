@@ -1,5 +1,6 @@
 {
   "currentSessionName": "findWebPage",
+  "currentSessionDisplayedName": "Find web page",
   "query": "",
   "sourceNames": [ "tabs", "bookmarks", "history" ],
   "resultsBySourceName": {

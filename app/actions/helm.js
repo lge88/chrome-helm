@@ -16,6 +16,29 @@ export function search(query) {
   return fn;
 }
 
+export function selectSession(sessionName) {
+  return (dispatch, getState) => {
+    helm.getOrCreateSession(sessionName, (session) => {
+      if (!session) return;
+
+      const { sessionName, sessionDisplayedName, sourceNames, actionNames } = session;
+      dispatch({
+        type: types.UPDATE_SESSION,
+        currentSessionName: sessionName,
+        currentSessionDisplayedName: sessionDisplayedName,
+        sourceNames,
+        actionNames
+      });
+
+      const { currentSessionName, query } = getState();
+      helm.search(currentSessionName, query, {}, searchResult => {
+        const { sourceName, displayedName, candidates } = searchResult;
+        dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
+      });
+    });
+  };
+}
+
 export function loadState(stateName) {
   return { type: types.LOAD_STATE, stateName };
 }

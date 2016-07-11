@@ -45,8 +45,8 @@ export class Session {
     });
   }
 
-  getAvailableActions(candidates) {
-    let availableActions = [];
+  getActionCandidates(candidates, callback) {
+    let actionCandidates = [];
 
     for (let i = 0, len = this._actions.length; i < len; ++i) {
       const action = this._actions[i];
@@ -56,17 +56,26 @@ export class Session {
       }
       if (!canRun) continue;
 
-      availableActions.push({
-        name: action.name,
-        displayedName: action.displayedName || action.name,
-        description: action.description
+      actionCandidates.push({
+        title: action.displayedName || action.name,
+        description: action.description,
+        actionIndex: i
       });
     }
 
-    return availableActions;
+    return callback(actionCandidates);
   }
 
-  runAction(actionName, callback) {
+  runAction(actionIndex, candidates, context, callback) {
+    const action = this._actions[actionIndex];
+    if (!action) return callback(`Can not find action with index ${actionIndex}`);
 
+    if (typeof action.canRun === 'function') {
+      if (!action.canRun(candidates)) {
+        return callback(`${action.name} can not run on given candidates`);
+      }
+    }
+
+    return action.run(candidates, context, callback);
   }
 }

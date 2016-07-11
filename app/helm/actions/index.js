@@ -1,4 +1,5 @@
+import { findWebPage } from './findWebPage';
 
-export const findUrl = {
-
+export const actions = {
+  [findWebPage.name]: findWebPage
 };

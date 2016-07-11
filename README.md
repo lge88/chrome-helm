@@ -54,8 +54,8 @@ Unique. It will be used as key in a dictionary.
 #### `description: String` (optional)
 
 #### `run(candidates: [Candidate], context: Object, callback: Function)` (required)
-- `callback` has a signature of `error: String? => void`. If success, `callback` is invoked with `error = null`, otherwise `callback` is invoked with a error message string.
-- `context` is an empty object for now. It might be used in the future to pass extra information to action.
+`context` is an empty object for now. Might be used to pass extra info in the future.
+`callback` has a signature of `error: String? => void`. If success, `callback` is invoked with `error = null`, otherwise `callback` is invoked with a error message string.
 
 #### `canRun(candidates: [Candidate]) => Bool` (optional)
 Examine the candidate list, descide whether this action can be ran. If it returns `false`, the action won't be presented in the action selection UI.

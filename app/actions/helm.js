@@ -42,3 +42,38 @@ export function selectSession(sessionName) {
 export function loadState(stateName) {
   return { type: types.LOAD_STATE, stateName };
 }
+
+function getSingleSelectedCandidate(cursor, resultsBySourceName) {
+  const result = cursor && resultsBySourceName[cursor.sourceName];
+  const candidate = result && result.candidates && result.candidates[cursor.index];
+  return candidate || null;
+}
+
+function noop() {}
+
+function runDefaultAction(dispatch, getState) {
+  const {
+    currentSessionName,
+    resultsBySourceName,
+    cursor,
+    multiSelections
+  } = getState();
+
+  // get candidates from single/multi selection
+  // TODO: handle multi selections
+  let candidates = [];
+  const candidate = getSingleSelectedCandidate(cursor, resultsBySourceName);
+  if (candidate) candidates.push(candidate);
+
+  const context = {}, callback = noop;
+  helm.runAction(currentSessionName, 0, candidates, context, callback);
+}
+
+export function onKeyDown(e) {
+  return (dispatch, getState) => {
+    // Read keybinding from getState().
+    if (e.keyCode === 13) {
+      runDefaultAction(dispatch, getState);
+    }
+  };
+}

@@ -20,6 +20,7 @@ class App extends Component {
         <SearchBox
             query = { query }
             onChange = { actions.search }
+            onKeyDown = { actions.onKeyDown }
         />
         <SourceList
             sourceNames = { sourceNames }

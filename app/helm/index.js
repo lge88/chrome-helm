@@ -22,3 +22,17 @@ export function search(sessionName, query, options, onUpdate) {
     session.search(query, options, onUpdate);
   }
 }
+
+export function getActionCandidates(sessionName, selectedCandidate, markedCandidates, callback) {
+  const session = sessions[sessionName];
+  if (session) {
+    session.getActionCandidates(selectedCandidate, markedCandidates, callback);
+  }
+}
+
+export function runAction(sessionName, actionIndex, context, callback) {
+  const session = sessions[sessionName];
+  if (session) {
+    session.runAction(actionIndex, context, callback);
+  }
+}

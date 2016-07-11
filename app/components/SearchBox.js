@@ -6,7 +6,7 @@ export default class SearchBox extends Component {
   };
 
   render() {
-    const { query } = this.props;
+    const { query, onKeyDown } = this.props;
     return (
       <input
           className = "search-box"
@@ -18,6 +18,7 @@ export default class SearchBox extends Component {
           spellCheck = "false"
           value = { query }
           onChange = { this.handleChange }
+          onKeyDown = { onKeyDown }
       />
     );
   }

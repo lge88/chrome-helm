@@ -43,8 +43,30 @@ class CursorHandle {
     return this._links[sourceName].prev;
   }
 
+  prevNonEmptySourceName(sourceName) {
+    let newSourceName = this.prevSourceName(sourceName);
+    while (newSourceName !== null &&
+           this._resultsBySourceName[newSourceName] &&
+           this._resultsBySourceName[newSourceName].candidates &&
+           this._resultsBySourceName[newSourceName].candidates.length === 0) {
+      newSourceName = this.prevSourceName(newSourceName);
+    }
+    return newSourceName;
+  }
+
   nextSourceName(sourceName) {
     return this._links[sourceName].next;
+  }
+
+  nextNonEmptySourceName(sourceName) {
+    let newSourceName = this.nextSourceName(sourceName);
+    while (newSourceName !== null &&
+           this._resultsBySourceName[newSourceName] &&
+           this._resultsBySourceName[newSourceName].candidates &&
+           this._resultsBySourceName[newSourceName].candidates.length === 0) {
+      newSourceName = this.nextSourceName(newSourceName);
+    }
+    return newSourceName;
   }
 
   next(cursor) {
@@ -54,7 +76,7 @@ class CursorHandle {
     if (index + 1 < len) {
       return { sourceName, index: index + 1 };
     } else {
-      const newSourceName = this.nextSourceName(sourceName);
+      const newSourceName = this.nextNonEmptySourceName(sourceName);
       if (newSourceName &&
           this._resultsBySourceName[newSourceName] &&
           this._resultsBySourceName[newSourceName].candidates &&
@@ -74,7 +96,7 @@ class CursorHandle {
     if (index - 1 >= 0) {
       return { sourceName, index: index - 1 };
     } else {
-      const newSourceName = this.prevSourceName(sourceName);
+      const newSourceName = this.prevNonEmptySourceName(sourceName);
       if (newSourceName &&
           this._resultsBySourceName[newSourceName] &&
           this._resultsBySourceName[newSourceName].candidates &&

@@ -29,7 +29,7 @@ export class BookmarkSource {
   };
 
   constructor(options) {
-    this._options = { ...BookmarkSource.defaultOptions, options };
+    this._options = { ...BookmarkSource.defaultOptions, ...options };
   }
 
   search(query, options, callback) {

@@ -1,4 +1,5 @@
 import { sources } from '../sources';
+import { actions } from '../actions';
 
 export class Session {
   constructor(options) {
@@ -13,7 +14,7 @@ export class Session {
       klass: sources[name],
       instance: new sources[name]()
     }));
-    this._actions = actionNames;
+    this._actions = actionNames.map(name => actions[name]);
   }
 
   getName() {
@@ -29,7 +30,7 @@ export class Session {
   }
 
   getActionNames() {
-    return this._actions.map(action => action);
+    return this._actions.map(action => action.name);
   }
 
   search(query, options, onUpdate) {
@@ -42,5 +43,30 @@ export class Session {
         });
       });
     });
+  }
+
+  getAvailableActions(candidates) {
+    let availableActions = [];
+
+    for (let i = 0, len = this._actions.length; i < len; ++i) {
+      const action = this._actions[i];
+      let canRun = true;
+      if (typeof action.canRun === 'function') {
+        canRun = action.canRun(candidates);
+      }
+      if (!canRun) continue;
+
+      availableActions.push({
+        name: action.name,
+        displayedName: action.displayedName || action.name,
+        description: action.description
+      });
+    }
+
+    return availableActions;
+  }
+
+  runAction(actionName, callback) {
+
   }
 }

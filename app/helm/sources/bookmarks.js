@@ -1,26 +1,12 @@
+import { AttributeMatcher } from '../../utils/AttributeMatcher';
+
 function createBookmarkCandidate(bookmark) {
   return {
     title: bookmark.title,
     url: bookmark.url,
-    bookmark: bookmark
+    bookmark: bookmark,
+    sourceName: 'bookmarks'
   };
-}
-
-function escapeRegex(str) {
-  return str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&');
-}
-
-function filterCandidate(query, candidate) {
-  if (query === '') return true;
-
-  function filterToken(token) {
-    token = escapeRegex(token);
-    const re = new RegExp(token, "i");
-    return candidate.title.search(re) >= 0 ||
-      candidate.url.search(re) >= 0;
-  }
-
-  return query.split(/\s+/).every(filterToken);
 }
 
 function flatten(bookmarks, node) {
@@ -39,16 +25,17 @@ export class BookmarkSource {
   static displayedName = 'Bookmarks';
 
   constructor(options) {
+    this._matcher = new AttributeMatcher([ 'title', 'url' ]);
+
     this._bookmarks = [];
     const iter = flatten.bind(null, this._bookmarks);
     chrome.bookmarks.getTree(nodes => nodes.forEach(iter));
-
     // TODO: listen to bookmarks change events
     // update this._bookmarks
   }
 
   search(query, options, callback) {
-    const candidates = this._bookmarks.filter(filterCandidate.bind(null, query));
+    const candidates = this._bookmarks.filter(this._matcher.test.bind(this._matcher, query));
     callback(candidates);
   }
 

@@ -46,14 +46,18 @@ This method is call when source is deactivated.
 ### Action
 A helm action can be applied on a list of candidates. All helm actions is placed under `app/helm/actions` folder.
 
-#### `getName() => String` (required)
+#### `name: String` (required)
 Unique. It will be used as key in a dictionary.
 
-#### `run(candidates: [Candidate], context: Object, callback: Function)` (required)
-- `callback` has a signature of `error: String? => void`. If success, `callback` is invoked with `error = null`, otherwise `callback` is invoked with a error message string.
-- `context` is an empty object for now. It might be used in the future to pass extra information to action.
+#### `displayedName: String` (optional)
 
-#### `shouldRun(candidates: [Candidate]) => Bool` (optional)
+#### `description: String` (optional)
+
+#### `run(candidates: [Candidate], context: Object, callback: Function)` (required)
+`context` is an empty object for now. Might be used to pass extra info in the future.
+`callback` has a signature of `error: String? => void`. If success, `callback` is invoked with `error = null`, otherwise `callback` is invoked with a error message string.
+
+#### `canRun(candidates: [Candidate]) => Bool` (optional)
 Examine the candidate list, descide whether this action can be ran. If it returns `false`, the action won't be presented in the action selection UI.
 
 ### Session

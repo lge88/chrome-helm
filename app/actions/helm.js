@@ -73,7 +73,16 @@ export function onKeyDown(e) {
   return (dispatch, getState) => {
     // Read keybinding from getState().
     if (e.keyCode === 13) {
+      // Enter key
       runDefaultAction(dispatch, getState);
+    } else if (e.keyCode === 38 || (e.ctrlKey && e.keyCode === 80)) {
+      // Up key or Ctrl-p
+      dispatch({ type: types.PREV_CANDIDATE });
+    } else if (e.keyCode === 40 || (e.ctrlKey && e.keyCode === 78)) {
+      // Down key or Ctrl-n
+      dispatch({ type: types.NEXT_CANDIDATE });
+    } else if (e.keyCode === 27) {
+      helm.gotoLastFocused();
     }
   };
 }

@@ -36,3 +36,22 @@ export function runAction(sessionName, actionIndex, context, callback) {
     session.runAction(actionIndex, context, callback);
   }
 }
+
+// Hacky, updated current window { focused: false } won't work.
+function getLastFocused(callback) {
+  chrome.windows.getAll({ populate: true }, function(wins) {
+    for (let i = 0; i < wins.length; ++i) {
+      if (wins[i].tabs.length > 0 && wins[i].tabs[0].title !== 'Chrome Helm') {
+        callback(wins[i]);
+        return;
+      }
+    }
+    callback(null);
+  });
+}
+
+export function gotoLastFocused() {
+  getLastFocused(function(win) {
+    chrome.windows.update(win.id, { focused: true });
+  });
+}

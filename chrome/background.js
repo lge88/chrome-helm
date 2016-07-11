@@ -7,9 +7,10 @@ function createOrShowHelmWindow() {
       chrome.tabs.update(tabs[0].id, {
         active: true,
         selected: true
-      });
-      chrome.windows.update(tabs[0].windowId, {
-        focused: true
+      }, (tab) => {
+        chrome.windows.update(tab.windowId, {
+          focused: true
+        });
       });
     } else {
       let width = 800, height = 475;

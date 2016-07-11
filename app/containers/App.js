@@ -44,7 +44,9 @@ class App extends Component {
 
 export default connect(
   state => state,
-  dispatch => ({
-    actions: bindActionCreators(HelmActions, dispatch)
-  })
+  dispatch => {
+    const actions = bindActionCreators(HelmActions, dispatch);
+    window.HelmActions = actions;
+    return { actions };
+  }
 )(App);

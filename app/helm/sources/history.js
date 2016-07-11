@@ -16,7 +16,7 @@ export class HistorySource {
 
   static defaultOptions = {
     limit: 100,
-    lookbackInDays: 30
+    lookbackInDays: 7
   };
 
   constructor(options) {

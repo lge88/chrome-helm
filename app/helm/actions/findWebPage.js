@@ -14,12 +14,13 @@ export const findWebPage = {
       chrome.tabs.update(candidate.tab.id, {
         active: true,
         selected: true
-      });
-      chrome.windows.update(candidate.tab.windowId, {
-        focused: true
+      }, () => {
+        chrome.windows.update(candidate.tab.windowId, {
+          focused: true
+        }, callback);
       });
     } else {
-      chrome.tabs.create({ url: candidate.url });
+      chrome.tabs.create({ url: candidate.url }, callback);
     }
   }
 };

@@ -66,7 +66,15 @@ function runDefaultAction(dispatch, getState) {
   if (candidate) candidates.push(candidate);
 
   const context = {}, callback = noop;
-  helm.runAction(currentSessionName, 0, candidates, context, callback);
+  helm.runAction(currentSessionName, 0, candidates, context, () => {
+    dispatch({ type: types.UPDATE_QUERY, query: '' });
+
+    const { currentSessionName } = getState();
+    helm.search(currentSessionName, '', {}, searchResult => {
+      const { sourceName, displayedName, candidates } = searchResult;
+      dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
+    });
+  });
 }
 
 export function onKeyDown(e) {

@@ -30,10 +30,10 @@ export function getActionCandidates(sessionName, selectedCandidate, markedCandid
   }
 }
 
-export function runAction(sessionName, actionIndex, context, callback) {
+export function runAction(sessionName, actionIndex, candidates, context, callback) {
   const session = sessions[sessionName];
   if (session) {
-    session.runAction(actionIndex, context, callback);
+    session.runAction(actionIndex, candidates, context, callback);
   }
 }
 

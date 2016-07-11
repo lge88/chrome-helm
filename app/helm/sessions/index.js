@@ -10,6 +10,6 @@ export const findTab = new Session({
 export const findWebPage = new Session({
   name: 'findWebPage',
   displayedName: 'Find web page',
-  sources: [ 'tabs', 'bookmarks' ],
+  sources: [ 'tabs', 'bookmarks', 'googleSuggest', 'webSearch' ],
   actions: [ 'findWebPage' ]
 });

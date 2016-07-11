@@ -24,7 +24,12 @@ export class BookmarkSource {
   static key = 'bookmarks';
   static displayedName = 'Bookmarks';
 
+  static defaultOptions = {
+    limit: 10
+  };
+
   constructor(options) {
+    this._options = { ...BookmarkSource.defaultOptions, options };
     this._matcher = new AttributeMatcher([ 'title', 'url' ]);
 
     this._bookmarks = [];
@@ -35,7 +40,14 @@ export class BookmarkSource {
   }
 
   search(query, options, callback) {
-    const candidates = this._bookmarks.filter(this._matcher.test.bind(this._matcher, query));
+    const filter = this._matcher.test.bind(this._matcher, query);
+    const { limit } = { ...this._options, options };
+
+    let candidates = [];
+    for (let i = 0, len = this._bookmarks.length; i < len; ++i) {
+      const candidate = this._bookmarks[i];
+      if (filter(candidate) && candidates.length < limit) candidates.push(candidate);
+    }
     callback(candidates);
   }
 

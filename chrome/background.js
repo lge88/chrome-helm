@@ -13,7 +13,7 @@ function createOrShowHelmWindow() {
         });
       });
     } else {
-      let width = 800, height = 475;
+      const width = 600, height = 600;
       let left = (screen.width >> 1) - (width >> 1);
       let top = (screen.height >> 1) - (height >> 1);
 

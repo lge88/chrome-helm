@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import CandidateItem from './CandidateItem';
+import style from './CandidateGroup.css';
 
 export default class CandidateGroup extends Component {
   renderCandidates() {
@@ -15,7 +16,7 @@ export default class CandidateGroup extends Component {
             marked = { !!(markedIndexMap && markedIndexMap[i]) }
             thumb = { candidate.thumb }
             title = { candidate.title }
-            url = { candidate.url }
+            details = { candidate.details }
         />
       );
       if (els.length >= limit) break;
@@ -27,9 +28,9 @@ export default class CandidateGroup extends Component {
   render() {
     const { name } = this.props;
     return (
-      <div className="candidate-group">
-        <div className="candidate-group-name">{name}</div>
-        <table className = "candidate-group-table">
+      <div className = { style.group }>
+        <div className = { style.groupName }> { name } </div>
+        <table className = { style.groupTable } >
           <tbody>
             { this.renderCandidates() }
           </tbody>

@@ -1,6 +1,7 @@
 function createHistoryCandidate(historyItem) {
   return {
     title: historyItem.title,
+    details: historyItem.url,
     url: historyItem.url,
     historyItem: historyItem,
     sourceName: 'history'

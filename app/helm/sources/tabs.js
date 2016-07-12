@@ -2,9 +2,10 @@ import { AttributeMatcher } from '../../utils/AttributeMatcher';
 
 function createTabCandidate(tab) {
   return {
-    title: tab.title,
-    url: tab.url,
     thumb: tab.favIconUrl,
+    title: tab.title,
+    details: tab.url,
+    url: tab.url,
     tab: tab,
     sourceName: 'tabs'
   };

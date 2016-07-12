@@ -10,7 +10,7 @@ class App extends Component {
     // this.props.actions.search('');
     this.props.actions.selectSession('findWebPage');
     // this.props.actions.selectSession('findTab');
-    // this.props.actions.loadState('state01');
+    // this.props.actions.loadState('state02');
   }
 
   render() {
@@ -51,7 +51,7 @@ export default connect(
     chrome.windows.getCurrent({}, (win) => {
       chrome.windows.onFocusChanged.addListener((winId) => {
         if (winId === win.id) {
-          actions.search('');
+          // actions.search('');
         }
       });
     });

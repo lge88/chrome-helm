@@ -39,7 +39,7 @@ export default class SourceList extends Component {
 
   render() {
     return (
-      <div className="candidate-group-list">
+      <div>
         { this.renderCandidateGroups() }
       </div>
     );

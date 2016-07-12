@@ -1,6 +1,7 @@
 function createBookmarkCandidate(bookmark) {
   return {
     title: bookmark.title,
+    details: bookmark.url,
     url: bookmark.url,
     bookmark: bookmark,
     sourceName: 'bookmarks'

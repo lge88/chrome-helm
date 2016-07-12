@@ -1,0 +1,40 @@
+.thumb {
+  text-align: center;
+}
+
+.thumb > img {
+  height: 100%;
+  width: auto;
+}
+
+.title, .details {
+  overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 2px 0;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.details {
+  font-size: 70%;
+}
+
+.normal {
+  background-color: #eeeeee;
+}
+
+.selected {
+  background-color: #cccccc;
+}
+
+.marked {
+  background-color: yellow;
+}
+
+.marked.selected {
+  background-color: red;
+}

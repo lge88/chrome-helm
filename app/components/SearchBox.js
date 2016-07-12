@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import style from './SearchBox.css';
 
 export default class SearchBox extends Component {
   handleChange = (event) => {
@@ -9,7 +10,7 @@ export default class SearchBox extends Component {
     const { query, onKeyDown } = this.props;
     return (
       <input
-          className = "search-box"
+          className = { style.searchBox }
           type = "text"
           autoComplete = "off"
           autoCorrect = "off"

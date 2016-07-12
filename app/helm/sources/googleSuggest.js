@@ -1,3 +1,11 @@
+function createGoogleSuggestCandidate({ searchEndpoint, suggestion }) {
+  const url = searchEndpoint + encodeURIComponent(suggestion);
+  return  {
+    title: suggestion,
+    url
+  };
+}
+
 function parseXml(xmlStr) {
   return (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
 }
@@ -28,10 +36,7 @@ export class GoogleSuggestSource {
         let candidates = [];
         for (let i = 0, len = elements.length; i < len; ++i) {
           const suggestion = elements[i].getAttribute('data');
-          const candidate = {
-            title: suggestion,
-            url: searchEndpoint + encodeURIComponent(suggestion)
-          };
+          const candidate = createGoogleSuggestCandidate({ searchEndpoint, suggestion });
           candidates.push(candidate);
           if (candidates.length > limit) break;
         }

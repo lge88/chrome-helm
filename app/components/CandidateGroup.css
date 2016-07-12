@@ -1,0 +1,21 @@
+.group {
+  margin-bottom: 1.0em;
+}
+
+.groupName, .groupTable {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+}
+
+.groupName {
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.groupTable {
+  margin-top: 5px;
+  table-layout: fixed;
+  font-size: 12pt;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}

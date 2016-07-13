@@ -10,7 +10,7 @@ class App extends Component {
     // this.props.actions.search('');
     this.props.actions.selectSession('findWebPage');
     // this.props.actions.selectSession('findTab');
-    // this.props.actions.loadState('state02');
+    // this.props.actions.loadState('state03');
   }
 
   render() {

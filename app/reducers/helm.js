@@ -3,22 +3,11 @@ import states from '../fixtures/states';
 
 const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
-function getFirstNonEmptySource(sourceNames, resultsBySourceName) {
-  for (let i = 0, len = sourceNames.length; i < len; ++i) {
-    const sourceName = sourceNames[i];
-    const result = resultsBySourceName[sourceName];
-    if (result && result.candidates && result.candidates.length > 0) {
-      return sourceName;
-    }
-  }
-  return null;
-}
-
 class CursorHandle {
   constructor() {
     this._sourceNames = null;
     this._resultsBySourceName = null;
-    this._links = null;
+    this._indices = null;
   }
 
   reset(sourceNames, resultsBySourceName) {
@@ -29,18 +18,29 @@ class CursorHandle {
 
     this._sourceNames = sourceNames;
     this._resultsBySourceName = resultsBySourceName;
+    this._indices = {};
     this._links = {};
     const len = this._sourceNames.length;
     for (let i = 0; i < len; ++i) {
       const sourceName = this._sourceNames[i];
-      const prev = i - 1 >= 0 ? this._sourceNames[i - 1] : null;
-      const next = i + 1 < len ? this._sourceNames[i + 1] : null;
-      this._links[sourceName] = { prev, next };
+      this._indices[sourceName] = i;
     }
   }
 
+  getFirstNonEmptySource() {
+    for (let i = 0, len = this._sourceNames.length; i < len; ++i) {
+      const sourceName = this._sourceNames[i];
+      const result = this._resultsBySourceName[sourceName];
+      if (result && result.candidates && result.candidates.length > 0) {
+        return sourceName;
+      }
+    }
+    return null;
+  }
+
   prevSourceName(sourceName) {
-    return this._links[sourceName].prev;
+    const idx = this._indices[sourceName] - 1;
+    return idx >= 0 ? this._sourceNames[idx] : null;
   }
 
   prevNonEmptySourceName(sourceName) {
@@ -55,7 +55,8 @@ class CursorHandle {
   }
 
   nextSourceName(sourceName) {
-    return this._links[sourceName].next;
+    const idx = this._indices[sourceName] + 1;
+    return idx < this._sourceNames.length ? this._sourceNames[idx] : null;
   }
 
   nextNonEmptySourceName(sourceName) {
@@ -109,6 +110,23 @@ class CursorHandle {
       }
     }
   }
+
+  // Return true if sourceA should be ranked before sourceB.
+  isBefore(sourceA, sourceB) {
+    return this._indices[sourceA] < this._indices[sourceB];
+  }
+
+  // Update cursor position if any of the condition meets
+  //   - It was null;
+  //   - sourceName was null;
+  //   - The source cursor pointed at is updated
+  //   - The source above cursor is updated.
+  shouldUpdateCursor(cursor, updatedSourceName) {
+    return !cursor ||
+      !cursor.sourceName ||
+      cursor.sourceName === updatedSourceName ||
+      this.isBefore(updatedSourceName, cursor.sourceName);
+  }
 }
 
 const cursorHandle = new CursorHandle();
@@ -127,18 +145,25 @@ const actionsMap = {
   },
 
   [ActionTypes.UPDATE_SOURCE](state, action) {
-    const { sourceName, displayedName, candidates } = action;
-    const resultsBySourceName = clone(state.resultsBySourceName);
-    resultsBySourceName[sourceName] = { displayedName, candidates };
+    const { sourceNames } = state;
+    const { sourceName: updatedSourceName, displayedName, candidates } = action;
+    let { resultsBySourceName, cursor } = state;
+
+    // Update results
+    resultsBySourceName = clone(resultsBySourceName);
+    resultsBySourceName[updatedSourceName] = { displayedName, candidates };
 
     // Update cursor
-    const { sourceNames } = state;
-    const cursor = {
-      sourceName: getFirstNonEmptySource(sourceNames, resultsBySourceName),
-      index: 0
-    };
+    cursorHandle.reset(sourceNames, resultsBySourceName);
+    if (cursorHandle.shouldUpdateCursor(cursor, updatedSourceName)) {
+      cursor = {
+        sourceName: cursorHandle.getFirstNonEmptySource(),
+        index: 0
+      };
+    }
 
     // TODO: update multi selection
+
     return { ...state, resultsBySourceName, cursor };
   },
 

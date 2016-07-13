@@ -18,13 +18,10 @@ class CursorHandle {
 
     this._sourceNames = sourceNames;
     this._resultsBySourceName = resultsBySourceName;
-    this._indices = {};
-    this._links = {};
-    const len = this._sourceNames.length;
-    for (let i = 0; i < len; ++i) {
-      const sourceName = this._sourceNames[i];
-      this._indices[sourceName] = i;
-    }
+    this._indices = this._sourceNames.reduce((sofar, sourceName, index) => {
+      sofar[sourceName] = index;
+      return sofar;
+    }, {});
   }
 
   getFirstNonEmptySource() {
@@ -45,10 +42,7 @@ class CursorHandle {
 
   prevNonEmptySourceName(sourceName) {
     let newSourceName = this.prevSourceName(sourceName);
-    while (newSourceName !== null &&
-           this._resultsBySourceName[newSourceName] &&
-           this._resultsBySourceName[newSourceName].candidates &&
-           this._resultsBySourceName[newSourceName].candidates.length === 0) {
+    while (newSourceName && this._resultsBySourceName[newSourceName].candidates.length === 0) {
       newSourceName = this.prevSourceName(newSourceName);
     }
     return newSourceName;
@@ -61,10 +55,7 @@ class CursorHandle {
 
   nextNonEmptySourceName(sourceName) {
     let newSourceName = this.nextSourceName(sourceName);
-    while (newSourceName !== null &&
-           this._resultsBySourceName[newSourceName] &&
-           this._resultsBySourceName[newSourceName].candidates &&
-           this._resultsBySourceName[newSourceName].candidates.length === 0) {
+    while (newSourceName && this._resultsBySourceName[newSourceName].candidates.length === 0) {
       newSourceName = this.nextSourceName(newSourceName);
     }
     return newSourceName;
@@ -78,10 +69,7 @@ class CursorHandle {
       return { sourceName, index: index + 1 };
     } else {
       const newSourceName = this.nextNonEmptySourceName(sourceName);
-      if (newSourceName &&
-          this._resultsBySourceName[newSourceName] &&
-          this._resultsBySourceName[newSourceName].candidates &&
-          this._resultsBySourceName[newSourceName].candidates.length > 0) {
+      if (newSourceName && this._resultsBySourceName[newSourceName].candidates.length > 0) {
         return { sourceName: newSourceName, index: 0 };
       } else {
         // Unchanged
@@ -98,10 +86,7 @@ class CursorHandle {
       return { sourceName, index: index - 1 };
     } else {
       const newSourceName = this.prevNonEmptySourceName(sourceName);
-      if (newSourceName &&
-          this._resultsBySourceName[newSourceName] &&
-          this._resultsBySourceName[newSourceName].candidates &&
-          this._resultsBySourceName[newSourceName].candidates.length > 0) {
+      if (newSourceName && this._resultsBySourceName[newSourceName].candidates.length > 0) {
         const newLen = this._resultsBySourceName[newSourceName].candidates.length;
         return { sourceName: newSourceName, index: newLen - 1 };
       } else {

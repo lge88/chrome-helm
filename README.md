@@ -33,6 +33,9 @@ A helm source is an object provides a list of candidate under query. All helm so
 #### `static key: String` (required)
 Unique. It will be used as key in a dictionary.
 
+#### `bootstrap(callback: () => void)` (optional)
+An optiaasync bootstrap function. Invoke `callback` when done.
+
 #### `search(query: String, options: Object, callback: Function) => void` (required)
 `callback` has a signature of `(candidates: [Candidate]) => void`. Possible fields in `options` are:
 - `limit: Int`: return no more that `limit` items.

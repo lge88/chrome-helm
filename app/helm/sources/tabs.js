@@ -22,9 +22,13 @@ export class TabSource {
 
   constructor(options) {
     this._options = { ...TabSource.defaultOptions, ...options };
+  }
 
+  bootstrap(callback) {
     const { searchableAttributes } = this._options;
     this._matcher = new AttributeMatcher(searchableAttributes);
+    setTimeout(callback, 1000);
+    // callback();
   }
 
   search(query, options, callback) {

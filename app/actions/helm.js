@@ -18,6 +18,7 @@ export function search(query) {
 
 export function selectSession(sessionName) {
   return (dispatch, getState) => {
+    dispatch({ type: types.UPDATE_LOADING, isLoading: true });
     helm.getOrCreateSession(sessionName, (session) => {
       if (!session) return;
 
@@ -34,6 +35,7 @@ export function selectSession(sessionName) {
       helm.search(currentSessionName, query, {}, searchResult => {
         const { sourceName, displayedName, candidates } = searchResult;
         dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
+        dispatch({ type: types.UPDATE_LOADING, isLoading: false });
       });
     });
   };

@@ -1,19 +1,33 @@
-import * as sessions from './sessions';
+import * as sessionConfigs from './sessions';
+import { Session } from './sessions/Session';
+
+let sessions = {};
+function getSessionInfo(session) {
+  return {
+    sessionName: session.getName(),
+    sessionDisplayedName: session.getDisplayedName(),
+    sourceNames: session.getSourceNames(),
+    actionNames: session.getActionNames()
+  };
+}
 
 export function getOrCreateSession(sessionName, callback) {
-  // TODO:
-  //   - lazily new Session(sessionConfig)
-  //   - only after all source bootstrap complete, invoke callback
-  const session = sessions[sessionName];
+  let session = sessions[sessionName] || null;
   if (session) {
-    callback({
-      sessionName: session.getName(),
-      sessionDisplayedName: session.getDisplayedName(),
-      sourceNames: session.getSourceNames(),
-      actionNames: session.getActionNames()
+    callback(getSessionInfo(session));
+  } else {
+    const config = sessionConfigs[sessionName];
+    if (!config) {
+      callback(null);
+      return;
+    }
+
+    session = new Session(config);
+    session.bootstrap(() => {
+      sessions[sessionName] = session;
+      callback(getSessionInfo(session));
     });
   }
-  return callback(null);
 }
 
 export function search(sessionName, query, options, onUpdate) {

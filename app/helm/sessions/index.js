@@ -1,15 +1,13 @@
-import { Session } from './Session';
-
-export const findTab = new Session({
+export const findTab = {
   name: 'findTab',
   displayedName: 'Find browser tab',
   sources: [ 'tabs' ],
   actions: [ 'findWebPage' ]
-});
+};
 
-export const findWebPage = new Session({
+export const findWebPage = {
   name: 'findWebPage',
   displayedName: 'Find web page',
   sources: [ 'tabs', 'bookmarks', 'history', 'googleSuggest', 'webSearch' ],
   actions: [ 'findWebPage' ]
-});
+};

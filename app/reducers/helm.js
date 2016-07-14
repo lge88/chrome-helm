@@ -124,6 +124,11 @@ const actionsMap = {
     return state;
   },
 
+  [ActionTypes.UPDATE_LOADING](state, action) {
+    const { isLoading } = action;
+    return { ...state, isLoading };
+  },
+
   [ActionTypes.UPDATE_QUERY](state, action) {
     const { query } = action;
     return { ...state, query };

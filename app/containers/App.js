@@ -16,6 +16,7 @@ class App extends Component {
   render() {
     const {
       query,
+      isLoading,
       currentSessionDisplayedName,
       sourceNames,
       resultsBySourceName,
@@ -28,6 +29,7 @@ class App extends Component {
       <div>
         <SearchBox
             query = { query }
+            isLoading = { isLoading }
             onChange = { actions.search }
             onKeyDown = { actions.onKeyDown }
         />

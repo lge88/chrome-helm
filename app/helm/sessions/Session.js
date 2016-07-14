@@ -7,14 +7,38 @@ export class Session {
       name,
       displayedName,
       sources: sourceNames,
-      actions: actionNames } = options;
+      actions: actionNames
+    } = options;
+    const sourceOptions = options.sourceOptions || {};
+
     this._name = name;
     this._displayedName = displayedName;
+
+    // Create sources
     this._sources = sourceNames.map(name => ({
       klass: sources[name],
-      instance: new sources[name]()
+      instance: new sources[name](sourceOptions[name] || {})
     }));
+
+    // TODO: Create actions
+    // TODO: pass options to source
     this._actions = actionNames.map(name => actions[name]);
+  }
+
+  // Async bootstrap for sources
+  bootstrap(callback) {
+    let needBootstrap = this._sources.reduce((sofar, source) => (
+      typeof source.instance.bootstrap === 'function' ? sofar + 1 : sofar
+    ), 0);
+    const bootstrapOne = (source) => {
+      if (typeof source.instance.bootstrap === 'function') {
+        source.instance.bootstrap(() => {
+          needBootstrap -= 1;
+          if (needBootstrap === 0) callback();
+        });
+      }
+    };
+    this._sources.forEach(bootstrapOne);
   }
 
   getName() {

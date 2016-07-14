@@ -35,7 +35,7 @@ export class TabSource {
       for (let i = 0, len = aTabs.length; i < len; ++i) {
         const tab = aTabs[i];
         const candidate = createTabCandidate(tab);
-        if (filter(candidate)) candidates.push(candidate);
+        if (filter(candidate) && !/Helm Session:/.test(candidate.title)) candidates.push(candidate);
         if (candidates.length >= limit) break;
       }
       callback(candidates);

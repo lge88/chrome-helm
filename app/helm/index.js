@@ -28,6 +28,7 @@ export function getOrCreateSession(sessionName, callback) {
       callback(getSessionInfo(session));
     });
   }
+  window.HelmSession = session;
 }
 
 export function search(sessionName, query, options, onUpdate) {

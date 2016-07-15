@@ -5,7 +5,7 @@ export default class SourceList extends Component {
   renderCandidateGroups() {
     const { cursor, multiSelections, sourceNames, resultsBySourceName } = this.props;
     // TODO: This should be computed from window height and UI size.
-    const totalQuota = 15;
+    const totalQuota = 25;
     let quota = totalQuota, elements = [];
     for (let i = 0, len = sourceNames.length; i < len; ++i) {
       const sourceName = sourceNames[i];

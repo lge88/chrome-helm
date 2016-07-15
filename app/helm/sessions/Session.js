@@ -7,7 +7,9 @@ export class Session {
       name,
       displayedName,
       sources: sourceNames,
-      actions: actionNames
+      actions: actionNames,
+      defaultAction,
+      persistentAction
     } = options;
     const sourceOptions = options.sourceOptions || {};
 
@@ -23,6 +25,8 @@ export class Session {
     // TODO: Create actions
     // TODO: pass options to source
     this._actions = actionNames.map(name => actions[name]);
+    this._defaultAction = actions[defaultAction];
+    this._persistentAction = actions[persistentAction];
   }
 
   // Async bootstrap for sources
@@ -101,5 +105,13 @@ export class Session {
     }
 
     return action.run(candidates, context, callback);
+  }
+
+  runDefaultAction(candidates, context, callback) {
+    this._defaultAction.run(candidates, context, callback);
+  }
+
+  runPersistentAction(candidates, context, callback) {
+    this._persistentAction.run(candidates, context, callback);
   }
 }

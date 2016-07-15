@@ -68,7 +68,7 @@ function runDefaultAction(dispatch, getState) {
   if (candidate) candidates.push(candidate);
 
   const context = {}, callback = noop;
-  helm.runAction(currentSessionName, 0, candidates, context, () => {
+  helm.runDefaultAction(currentSessionName, candidates, context, () => {
     dispatch({ type: types.UPDATE_QUERY, query: '' });
 
     const { currentSessionName } = getState();
@@ -76,6 +76,22 @@ function runDefaultAction(dispatch, getState) {
       const { sourceName, displayedName, candidates } = searchResult;
       dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
     });
+  });
+}
+
+function runPersistentAction(dispatch, getState) {
+  const {
+    currentSessionName,
+    resultsBySourceName,
+    cursor
+  } = getState();
+
+  let candidates = [];
+  const candidate = getSingleSelectedCandidate(cursor, resultsBySourceName);
+  if (candidate) candidates.push(candidate);
+
+  const context = {}, callback = noop;
+  helm.runPersistentAction(currentSessionName, candidates, context, () => {
   });
 }
 
@@ -99,6 +115,10 @@ export function onKeyDown(e) {
       e.stopPropagation();
     } else if (e.keyCode === 27) {
       helm.gotoLastFocused();
+      e.preventDefault();
+      e.stopPropagation();
+    } else if (e.ctrlKey && e.keyCode === 74) {
+      runPersistentAction(dispatch, getState);
       e.preventDefault();
       e.stopPropagation();
     }

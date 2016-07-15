@@ -52,6 +52,20 @@ export function runAction(sessionName, actionIndex, candidates, context, callbac
   }
 }
 
+export function runDefaultAction(sessionName, candidates, context, callback) {
+  const session = sessions[sessionName];
+  if (session) {
+    session.runDefaultAction(candidates, context, callback);
+  }
+}
+
+export function runPersistentAction(sessionName, candidates, context, callback) {
+  const session = sessions[sessionName];
+  if (session) {
+    session.runPersistentAction(candidates, context, callback);
+  }
+}
+
 // Hacky, updated current window { focused: false } won't work.
 function getLastFocused(callback) {
   chrome.windows.getAll({ populate: true }, function(wins) {

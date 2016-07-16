@@ -27,6 +27,9 @@ export class Session {
     this._actions = actionNames.map(name => actions[name]);
     this._defaultAction = actions[defaultAction];
     this._persistentAction = actions[persistentAction];
+
+    // Searching state:
+    this._currentQuery = null;
   }
 
   // Async bootstrap for sources
@@ -62,13 +65,16 @@ export class Session {
   }
 
   search(query, options, onUpdate) {
+    this._currentQuery = query;
     this._sources.forEach(source => {
       source.instance.search(query, {}, candidates => {
-        onUpdate({
-          sourceName: source.klass.key,
-          displayedName: source.klass.displayedName,
-          candidates
-        });
+        if (this._currentQuery === query) {
+          onUpdate({
+            sourceName: source.klass.key,
+            displayedName: source.klass.displayedName,
+            candidates
+          });
+        }
       });
     });
   }

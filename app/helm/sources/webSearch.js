@@ -7,13 +7,13 @@ export class WebSearchSource {
   };
 
   constructor(options) {
-    this._options = { ...WebSearchSource.defaultOptions, options };
+    this._options = { ...WebSearchSource.defaultOptions, ...options };
   }
 
   search(query, options, callback) {
     if (!query) return callback([]);
 
-    const { searchEndpoint } = { ...this._options, options };
+    const { searchEndpoint } = { ...this._options, ...options };
     const candidate = {
       title: query,
       url: searchEndpoint + encodeURIComponent(query)

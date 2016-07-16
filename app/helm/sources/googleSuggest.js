@@ -21,13 +21,13 @@ export class GoogleSuggestSource {
   };
 
   constructor(options) {
-    this._options = { ...GoogleSuggestSource.defaultOptions, options };
+    this._options = { ...GoogleSuggestSource.defaultOptions, ...options };
   }
 
   search(query, options, callback) {
     if (!query) return callback([]);
 
-    const { suggestEndpoint, searchEndpoint, limit } = { ...this._options, options };
+    const { suggestEndpoint, searchEndpoint, limit } = { ...this._options, ...options };
     return fetch(suggestEndpoint + encodeURIComponent(query))
       .then(resp => resp.text())
       .then(xml => parseXml(xml))

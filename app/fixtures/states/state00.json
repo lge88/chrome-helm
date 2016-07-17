@@ -3,6 +3,13 @@
   "currentSessionDisplayedName": "Find web apge",
   "isLoading": false,
   "query": "",
+  "keyMap": {
+    "runDefaultAction": "enter",
+    "runPersistentAction": "ctrl+j",
+    "prevCandidate": [ "ctrl+p", "up" ],
+    "nextCandidate": [ "ctrl+n", "down" ],
+    "quitHelmSession": [ "ctrl+g", "escape" ]
+  },
   "sourceNames": [ "tabs", "bookmarks" ],
   "resultsBySourceName": {},
   "cursor": null,

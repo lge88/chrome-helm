@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { HotKeys } from 'react-hotkeys';
+
 import SearchBox from '../components/SearchBox';
 import SourceList from '../components/SourceList';
 import * as HelmActions from '../actions/helm';
@@ -22,24 +24,35 @@ class App extends Component {
       resultsBySourceName,
       cursor,
       multiSelections,
+      keyMap,
       actions
     } = this.props;
+
+    const handlers = {
+      runDefaultAction: actions.runDefaultAction,
+      runPersistentAction: actions.runPersistentAction,
+      prevCandidate: actions.prevCandidate,
+      nextCandidate: actions.nextCandidate,
+      quitHelmSession: actions.quitHelmSession
+    };
+
     document.title = `Helm Session: ${currentSessionDisplayedName}`;
     return (
-      <div>
-        <SearchBox
-            query = { query }
-            isLoading = { isLoading }
-            onChange = { actions.search }
-            onKeyDown = { actions.onKeyDown }
-        />
-        <SourceList
-            sourceNames = { sourceNames }
-            resultsBySourceName = { resultsBySourceName }
-            cursor = { cursor }
-            multiSelections = { multiSelections }
-        />
-      </div>
+      <HotKeys keyMap = { keyMap } handlers = { handlers }>
+        <div>
+          <SearchBox
+              query = { query }
+              isLoading = { isLoading }
+              onChange = { actions.search }
+          />
+          <SourceList
+              sourceNames = { sourceNames }
+              resultsBySourceName = { resultsBySourceName }
+              cursor = { cursor }
+              multiSelections = { multiSelections }
+          />
+        </div>
+      </HotKeys>
     );
   }
 }

@@ -35,6 +35,7 @@
     "mustache": "^2.2.1",
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.0.2",
+    "react-hotkeys": "^0.8.0",
     "rimraf": "^2.4.3",
     "selenium-webdriver": "^2.47.0",
     "shelljs": "^0.7.0",

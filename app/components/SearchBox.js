@@ -10,11 +10,6 @@ export default class SearchBox extends Component {
     this.props.onChange(event.target.value);
   };
 
-  handleKeyDown = (event) => {
-    const { isLoading, onKeyDown } = this.props;
-    if (!isLoading) onKeyDown(event);
-  };
-
   render() {
     const { query, isLoading } = this.props;
     return (
@@ -32,7 +27,6 @@ export default class SearchBox extends Component {
           placeholder = { isLoading ? SearchBox.loadingPlaceHolder : SearchBox.searchPlaceHolder }
           value = { query }
           onChange = { this.handleChange }
-          onKeyDown = { this.handleKeyDown }
       />
     );
   }

@@ -2,6 +2,13 @@
   "currentSessionName": "findWebPage",
   "currentSessionDisplayedName": "Find web page",
   "query": "ranker git",
+  "keyMap": {
+    "runDefaultAction": "enter",
+    "runPersistentAction": "ctrl+j",
+    "prevCandidate": [ "ctrl+p", "up" ],
+    "nextCandidate": [ "ctrl+n", "down" ],
+    "quitHelmSession": [ "ctrl+g", "escape" ]
+  },
   "sourceNames": [
     "tabs",
     "bookmarks",

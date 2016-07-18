@@ -7,6 +7,17 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
   });
 });
 
+function refocusToHelm(callback) {
+  chrome.tabs.query({
+    title: 'Helm Session: *'
+  }, (tabs) => {
+    const helmTab = tabs[0];
+    chrome.windows.update(helmTab.windowId, {
+      focused: true
+    }, callback);
+  });
+}
+
 export const displayWebPage = {
   name: 'displayWebPage',
   displayedName: 'Display web page.',
@@ -26,16 +37,9 @@ export const displayWebPage = {
         if (lastWindowId !== candidate.tab.windowId) {
           chrome.windows.update(candidate.tab.windowId, {
             focused: true
-          }, () => {
-            chrome.tabs.query({
-              title: 'Helm Session: *'
-            }, (tabs) => {
-              const helmTab = tabs[0];
-              chrome.windows.update(helmTab.windowId, {
-                focused: true
-              }, callback);
-            });
-          });
+          }, refocusToHelm.bind(null, callback));
+        } else {
+          refocusToHelm(callback);
         }
       });
     }

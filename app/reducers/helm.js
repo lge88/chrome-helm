@@ -169,10 +169,18 @@ const actionsMap = {
 
     const { currentSessionName, currentSessionDisplayedName, sourceNames, actions } = action;
     const itemSelection = state.itemSelection;
+    const actionSelection = state.actionSelection;
 
     // TODO: handle action names
     const newItemSelection = { ...itemSelection, sourceNames };
-    return { ...state, currentSessionName, currentSessionDisplayedName, itemSelection: newItemSelection };
+    const newActionSelection = { ...actionSelection, actions };
+    return {
+      ...state,
+      currentSessionName,
+      currentSessionDisplayedName,
+      itemSelection: newItemSelection,
+      actionSelection: newActionSelection
+    };
   },
 
   [ActionTypes.PREV_CANDIDATE](state, action) {

@@ -60,8 +60,12 @@ export class Session {
     return this._sources.map(source => source.klass.key);
   }
 
-  getActionNames() {
-    return this._actions.map(action => action.name);
+  getActions() {
+    return this._actions.map(action => ({
+      name: action.name,
+      displayedName: action.displayedName,
+      description: action.description
+    }));
   }
 
   search(query, options, onUpdate, onComplete) {

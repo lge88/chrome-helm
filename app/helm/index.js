@@ -7,7 +7,7 @@ function getSessionInfo(session) {
     sessionName: session.getName(),
     sessionDisplayedName: session.getDisplayedName(),
     sourceNames: session.getSourceNames(),
-    actionNames: session.getActionNames()
+    actions: session.getActions()
   };
 }
 

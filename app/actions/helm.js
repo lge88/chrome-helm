@@ -23,14 +23,13 @@ export function selectSession(sessionName, callback) {
     helm.getOrCreateSession(sessionName, (session) => {
       if (!session) return;
 
-      const { sessionName, sessionDisplayedName, sourceNames, actionNames } = session;
+      const { sessionName, sessionDisplayedName, sourceNames, actions } = session;
       dispatch({
         type: types.UPDATE_SESSION,
         currentSessionName: sessionName,
         currentSessionDisplayedName: sessionDisplayedName,
         sourceNames,
-        // TODO: action object more than just names
-        actions: actionNames
+        actions
       });
 
       const { currentSessionName, itemSelection } = getState();

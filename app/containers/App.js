@@ -76,15 +76,6 @@ export default connect(
   dispatch => {
     const actions = bindActionCreators(HelmActions, dispatch);
     window.HelmActions = actions;
-
-    chrome.windows.getCurrent({}, (win) => {
-      chrome.windows.onFocusChanged.addListener((winId) => {
-        if (winId === win.id) {
-          // actions.search('');
-        }
-      });
-    });
-
     return { actions };
   }
 )(App);

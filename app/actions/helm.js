@@ -91,7 +91,8 @@ export function resetSearch(callback) {
   };
 }
 
-export function runDefaultAction() {
+export function runDefaultAction(event) {
+  if (event.preventDefault) event.preventDefault();
   return (dispatch, getState) => {
     const {
       currentSessionName,
@@ -108,7 +109,8 @@ export function runDefaultAction() {
   };
 }
 
-export function runPersistentAction() {
+export function runPersistentAction(event) {
+  if (event.preventDefault) event.preventDefault();
   return (dispatch, getState) => {
     const {
       currentSessionName,
@@ -124,7 +126,9 @@ export function runPersistentAction() {
   };
 }
 
-export function prevCandidate() {
+export function prevCandidate(event) {
+  if (event.preventDefault) event.preventDefault();
+
   return (dispatch, getState) => {
     const { isLoading } = getState();
     if (isLoading) return;
@@ -132,7 +136,9 @@ export function prevCandidate() {
   };
 }
 
-export function nextCandidate() {
+export function nextCandidate(event) {
+  if (event.preventDefault) event.preventDefault();
+
   return (dispatch, getState) => {
     const { isLoading } = getState();
     if (isLoading) return;
@@ -140,7 +146,9 @@ export function nextCandidate() {
   };
 }
 
-export function quitHelmSession() {
+export function quitHelmSession(event) {
+  if (event.preventDefault) event.preventDefault();
+
   const callback = helm.gotoLastFocused.bind(helm);
   return resetSearch(callback);
 }

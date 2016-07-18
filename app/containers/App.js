@@ -16,14 +16,17 @@ class App extends Component {
 
   renderItemSelection() {
     const {
-      query,
       isLoading,
+      actions
+    } = this.props;
+
+    const {
+      query,
       sourceNames,
       resultsBySourceName,
       cursor,
-      multiSelections,
-      actions
-    } = this.props;
+      multiSelections
+    } = this.props.itemSelection;
 
     const handlers = {
       runDefaultAction: actions.runDefaultAction,
@@ -55,13 +58,19 @@ class App extends Component {
   render() {
     const {
       currentSessionDisplayedName,
-      keyMap
+      keyMap,
+      mode
     } = this.props;
+
+    let body = null;
+    if (mode === 'itemSelection') {
+      body = this.renderItemSelection();
+    }
 
     document.title = `Helm Session: ${currentSessionDisplayedName}`;
     return (
       <HotKeys keyMap = { keyMap }>
-        { this.renderItemSelection() }
+        { body !== null && body }
       </HotKeys>
     );
   }

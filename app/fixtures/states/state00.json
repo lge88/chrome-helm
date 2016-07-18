@@ -2,7 +2,6 @@
   "currentSessionName": "findWebPage",
   "currentSessionDisplayedName": "Find web page",
   "isLoading": false,
-  "query": "",
   "keyMap": {
     "runDefaultAction": "enter",
     "runPersistentAction": "ctrl+j",
@@ -19,14 +18,17 @@
       "escape"
     ]
   },
-  "sourceNames": [
-    "tabs",
-    "bookmarks",
-    "history",
-    "googleSuggest",
-    "webSearch"
-  ],
-  "resultsBySourceName": {},
-  "cursor": null,
-  "multiSelections": {}
+  "mode": "itemSelection",
+  "itemSelection": {
+    "query": "",
+    "sourceNames": [],
+    "resultsBySourceName": {},
+    "cursor": null,
+    "multiSelections": {}
+  },
+  "actionSelection": {
+    "query": "",
+    "actions": [],
+    "index": 0
+  }
 }

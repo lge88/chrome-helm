@@ -130,14 +130,20 @@ const actionsMap = {
   },
 
   [ActionTypes.UPDATE_QUERY](state, action) {
+    const { mode } = state;
     const { query } = action;
-    return { ...state, query };
+    const newModeState = { ...state[mode], query };
+    return { ...state, [mode]: newModeState };
   },
 
   [ActionTypes.UPDATE_SOURCE](state, action) {
-    const { sourceNames } = state;
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const itemSelection = state.itemSelection;
+    const { sourceNames } = itemSelection;
     const { sourceName: updatedSourceName, displayedName, candidates } = action;
-    let { resultsBySourceName, cursor } = state;
+    let { resultsBySourceName, cursor } = itemSelection;
 
     // Update results
     resultsBySourceName = clone(resultsBySourceName);
@@ -153,27 +159,44 @@ const actionsMap = {
     }
 
     // TODO: update multi selection
-
-    return { ...state, resultsBySourceName, cursor };
+    const newItemSelection = { ...itemSelection, resultsBySourceName, cursor };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.UPDATE_SESSION](state, action) {
-    const { currentSessionName, currentSessionDisplayedName, sourceNames } = action;
-    return { ...state, currentSessionName, currentSessionDisplayedName, sourceNames };
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const { currentSessionName, currentSessionDisplayedName, sourceNames, actions } = action;
+    const itemSelection = state.itemSelection;
+
+    // TODO: handle action names
+    const newItemSelection = { ...itemSelection, sourceNames };
+    return { ...state, currentSessionName, currentSessionDisplayedName, itemSelection: newItemSelection };
   },
 
   [ActionTypes.PREV_CANDIDATE](state, action) {
-    const { sourceNames, resultsBySourceName, cursor } = state;
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const itemSelection = state.itemSelection;
+    const { sourceNames, resultsBySourceName, cursor } = itemSelection;
     cursorHandle.reset(sourceNames, resultsBySourceName);
     const newCursor = cursorHandle.prev(cursor);
-    return { ...state, cursor: newCursor };
+    const newItemSelection = { ...itemSelection, cursor: newCursor };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.NEXT_CANDIDATE](state, action) {
-    const { sourceNames, resultsBySourceName, cursor } = state;
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const itemSelection = state.itemSelection;
+    const { sourceNames, resultsBySourceName, cursor } = itemSelection;
     cursorHandle.reset(sourceNames, resultsBySourceName);
     const newCursor = cursorHandle.next(cursor);
-    return { ...state, cursor: newCursor };
+    const newItemSelection = { ...itemSelection, cursor: newCursor };
+    return { ...state, itemSelection: newItemSelection };
   }
 };
 

@@ -9,10 +9,11 @@ export function search(query) {
     if (isLoading) return;
 
     dispatch({ type: types.UPDATE_QUERY, query });
-    helm.search(currentSessionName, query, {}, searchResult => {
+    const onUpdate = (searchResult) => {
       const { sourceName, displayedName, candidates } = searchResult;
       dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
-    });
+    };
+    helm.search(currentSessionName, query, {}, onUpdate);
   };
 }
 
@@ -28,16 +29,24 @@ export function selectSession(sessionName, callback) {
         currentSessionName: sessionName,
         currentSessionDisplayedName: sessionDisplayedName,
         sourceNames,
-        actionNames
+        // TODO: action object more than just names
+        actions: actionNames
       });
 
-      const { currentSessionName, query } = getState();
-      helm.search(currentSessionName, query, {}, searchResult => {
+      const { currentSessionName, itemSelection } = getState();
+      const { query } = itemSelection;
+
+      const onUpdate = (searchResult) => {
         const { sourceName, displayedName, candidates } = searchResult;
         dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
+      };
+
+      const onComplete = () => {
         dispatch({ type: types.UPDATE_LOADING, isLoading: false });
         if (typeof callback === 'function') callback();
-      });
+      };
+
+      helm.search(currentSessionName, query, {}, onUpdate, onComplete);
     });
   };
 }
@@ -46,29 +55,38 @@ export function loadState(stateName) {
   return { type: types.LOAD_STATE, stateName };
 }
 
-function getSingleSelectedCandidate(cursor, resultsBySourceName) {
-  const result = cursor && resultsBySourceName[cursor.sourceName];
-  const candidate = result && result.candidates && result.candidates[cursor.index];
-  return candidate || null;
+function getSelectedCandidates(getState, { enableMultiSelection }) {
+  let candidates = [];
+
+  const state = getState();
+  const { mode } = state;
+  if (mode !== 'itemSelection') return candidates;
+
+  const  { resultsBySourceName, cursor, multiSelections } = state.itemSelection;
+
+  const isMultiSelection = enableMultiSelection &&
+          multiSelections && Object.keys(multiSelections).length > 0;
+
+  if (isMultiSelection) {
+    // TODO: handle multi selection
+  } else {
+    const result = cursor && resultsBySourceName[cursor.sourceName];
+    const candidate = result && result.candidates && result.candidates[cursor.index];
+    candidates.push(candidate);
+  }
+  return candidates;
 }
 
 export function runDefaultAction() {
   return (dispatch, getState) => {
     const {
       currentSessionName,
-      resultsBySourceName,
-      cursor,
-      multiSelections,
       isLoading
     } = getState();
 
     if (isLoading) return;
 
-    // get candidates from single/multi selection
-    // TODO: handle multi selections
-    let candidates = [];
-    const candidate = getSingleSelectedCandidate(cursor, resultsBySourceName);
-    if (candidate) candidates.push(candidate);
+    const candidates = getSelectedCandidates(getState, { enableMultiSelection: true });
 
     const context = {}, callback = noop;
     helm.runDefaultAction(currentSessionName, candidates, context, () => {
@@ -87,15 +105,12 @@ export function runPersistentAction() {
   return (dispatch, getState) => {
     const {
       currentSessionName,
-      resultsBySourceName,
-      cursor,
       isLoading
     } = getState();
+
     if (isLoading) return;
 
-    let candidates = [];
-    const candidate = getSingleSelectedCandidate(cursor, resultsBySourceName);
-    if (candidate) candidates.push(candidate);
+    const candidates = getSelectedCandidates(getState, { enableMultiSelection: false });
 
     const context = {}, callback = noop;
     helm.runPersistentAction(currentSessionName, candidates, context, noop);

@@ -31,10 +31,10 @@ export function getOrCreateSession(sessionName, callback) {
   window.HelmSession = session;
 }
 
-export function search(sessionName, query, options, onUpdate) {
+export function search(sessionName, query, options, onUpdate, onComplete) {
   const session = sessions[sessionName];
   if (session) {
-    session.search(query, options, onUpdate);
+    session.search(query, options, onUpdate, onComplete);
   }
 }
 

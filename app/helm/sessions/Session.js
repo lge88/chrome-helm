@@ -64,16 +64,19 @@ export class Session {
     return this._actions.map(action => action.name);
   }
 
-  search(query, options, onUpdate) {
+  search(query, options, onUpdate, onComplete) {
+    let remaining = this._sources.length;
     this._currentQuery = query;
     this._sources.forEach(source => {
       source.instance.search(query, {}, candidates => {
+        remaining -= 1;
         if (this._currentQuery === query) {
           onUpdate({
             sourceName: source.klass.key,
             displayedName: source.klass.displayedName,
             candidates
           });
+          if (remaining === 0 && typeof onComplete === 'function') onComplete();
         }
       });
     });

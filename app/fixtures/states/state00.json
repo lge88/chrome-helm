@@ -1,16 +1,31 @@
 {
   "currentSessionName": "findWebPage",
-  "currentSessionDisplayedName": "Find web apge",
+  "currentSessionDisplayedName": "Find web page",
   "isLoading": false,
   "query": "",
   "keyMap": {
     "runDefaultAction": "enter",
     "runPersistentAction": "ctrl+j",
-    "prevCandidate": [ "ctrl+p", "up" ],
-    "nextCandidate": [ "ctrl+n", "down" ],
-    "quitHelmSession": [ "ctrl+g", "escape" ]
+    "prevCandidate": [
+      "ctrl+p",
+      "up"
+    ],
+    "nextCandidate": [
+      "ctrl+n",
+      "down"
+    ],
+    "quitHelmSession": [
+      "ctrl+g",
+      "escape"
+    ]
   },
-  "sourceNames": [ "tabs", "bookmarks" ],
+  "sourceNames": [
+    "tabs",
+    "bookmarks",
+    "history",
+    "googleSuggest",
+    "webSearch"
+  ],
   "resultsBySourceName": {},
   "cursor": null,
   "multiSelections": {}

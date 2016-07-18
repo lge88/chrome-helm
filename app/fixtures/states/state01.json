@@ -1,38 +1,126 @@
 {
   "currentSessionName": "findWebPage",
   "currentSessionDisplayedName": "Find web page",
-  "query": "",
+  "isLoading": false,
+  "query": "emacs lisp",
   "keyMap": {
     "runDefaultAction": "enter",
     "runPersistentAction": "ctrl+j",
-    "prevCandidate": [ "ctrl+p", "up" ],
-    "nextCandidate": [ "ctrl+n", "down" ],
-    "quitHelmSession": [ "ctrl+g", "escape" ]
+    "prevCandidate": [
+      "ctrl+p",
+      "up"
+    ],
+    "nextCandidate": [
+      "ctrl+n",
+      "down"
+    ],
+    "quitHelmSession": [
+      "ctrl+g",
+      "escape"
+    ]
   },
-  "sourceNames": [ "tabs", "bookmarks", "history" ],
+  "sourceNames": [
+    "tabs",
+    "bookmarks",
+    "history",
+    "googleSuggest",
+    "webSearch"
+  ],
   "resultsBySourceName": {
+    "googleSuggest": {
+      "displayedName": "Google Sugguest",
+      "candidates": [
+        {
+          "title": "emacs lisp",
+          "url": "https://www.google.com/search?q=emacs%20lisp"
+        },
+        {
+          "title": "emacs lisp tutorial",
+          "url": "https://www.google.com/search?q=emacs%20lisp%20tutorial"
+        },
+        {
+          "title": "emacs lisp let",
+          "url": "https://www.google.com/search?q=emacs%20lisp%20let"
+        },
+        {
+          "title": "emacs lisp print",
+          "url": "https://www.google.com/search?q=emacs%20lisp%20print"
+        },
+        {
+          "title": "emacs lisp print variable",
+          "url": "https://www.google.com/search?q=emacs%20lisp%20print%20variable"
+        },
+        {
+          "title": "emacs lisp cond",
+          "url": "https://www.google.com/search?q=emacs%20lisp%20cond"
+        }
+      ]
+    },
+    "webSearch": {
+      "displayedName": "Search Web",
+      "candidates": [
+        {
+          "title": "emacs lisp",
+          "url": "https://www.google.com/search?q=emacs%20lisp"
+        }
+      ]
+    },
     "tabs": {
       "displayedName": "Browser Tabs",
       "candidates": [
         {
-          "title": "(368 unread) - lige@yahoo-inc.com - Yahoo Mail",
-          "url": "https://mg.mail.yahoo.com/neo/launch?.partner=ycorp#5279277243",
-          "thumb": "https://s.yimg.com/nq/favicons/1/favicons/favicon-badge-32x32.png"
+          "thumb": "http://ergoemacs.org/favicon.ico",
+          "title": "Emacs Lisp: Interactive Command Idioms",
+          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "sourceName": "tabs",
+          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "tab": {
+            "windowId": 1,
+            "id": 497
+          }
         },
         {
-          "title": "Add 5417213 and others to boost by lige · Pull Request #201 · Curveball/mappi-ranker",
-          "url": "https://git.corp.yahoo.com/Curveball/mappi-ranker/pull/201/files",
-          "thumb": "https://git.corp.yahoo.com/favicon-enterprise.ico"
+          "thumb": "https://www.emacswiki.org/favicon.ico",
+          "title": "EmacsWiki: Elisp Cookbook",
+          "details": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
+          "sourceName": "tabs",
+          "url": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
+          "tab": {
+            "windowId": 1,
+            "id": 499
+          }
         },
         {
-          "title": "Extensions",
-          "url": "chrome://extensions/?id=fmkadmapgofadopljbjfkapdkoienihi",
-          "thumb": "chrome://theme/IDR_EXTENSIONS_FAVICON@2x"
+          "thumb": "http://ergoemacs.org/favicon.ico",
+          "title": "Common Emacs Lisp Functions",
+          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "sourceName": "tabs",
+          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "tab": {
+            "windowId": 1,
+            "id": 501
+          }
         },
         {
-          "title": "React Developer Tools - Chrome Web Store",
-          "url": "https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi",
-          "thumb": "https://www.google.com/images/icons/product/chrome_web_store-32.png"
+          "title": "Learn Emacs Lisp in 15 minutes",
+          "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+          "sourceName": "tabs",
+          "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+          "tab": {
+            "windowId": 1,
+            "id": 511
+          }
+        },
+        {
+          "thumb": "http://www.gnu.org/graphics/gnu-head-mini.png",
+          "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "sourceName": "tabs",
+          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "tab": {
+            "windowId": 1,
+            "id": 527
+          }
         }
       ]
     },
@@ -40,14 +128,88 @@
       "displayedName": "Bookmarks",
       "candidates": [
         {
-          "title": "janl/mustache.js: Minimal templating with {{mustaches}} in JavaScript",
-          "url": "https://github.com/janl/mustache.js",
-          "thumb": "https://assets-cdn.github.com/favicon.ico"
+          "title": "Emacs: Working with Lines",
+          "details": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
+          "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
+          "bookmark": {
+            "dateAdded": 1367387713277,
+            "id": "390",
+            "index": 13,
+            "parentId": "290",
+            "title": "Emacs: Working with Lines",
+            "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html"
+          },
+          "sourceName": "bookmarks"
         },
         {
-          "title": "webpack UglifyJs es6 - Google Search",
-          "url": "https://www.google.com/search?q=webpack+optimize+es6&oq=webpack+optimize+es6&aqs=chrome..69i57.6807j0j7&sourceid=chrome&ie=UTF-8#q=webpack+UglifyJs+es6",
-          "thumb": "https://www.google.com/images/branding/product/ico/googleg_lodp.ico"
+          "title": "Emacs Lisp Idioms for Writing Interactive Commands",
+          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "bookmark": {
+            "dateAdded": 1373594592746,
+            "id": "343",
+            "index": 16,
+            "parentId": "291",
+            "title": "Emacs Lisp Idioms for Writing Interactive Commands",
+            "url": "http://ergoemacs.org/emacs/elisp_idioms.html"
+          },
+          "sourceName": "bookmarks"
+        },
+        {
+          "title": "EmacsWiki: Elisp Cookbook",
+          "details": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
+          "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
+          "bookmark": {
+            "dateAdded": 1373598852831,
+            "id": "344",
+            "index": 17,
+            "parentId": "291",
+            "title": "EmacsWiki: Elisp Cookbook",
+            "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4"
+          },
+          "sourceName": "bookmarks"
+        },
+        {
+          "title": "Common Emacs Lisp Functions",
+          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "bookmark": {
+            "dateAdded": 1373615778122,
+            "id": "345",
+            "index": 18,
+            "parentId": "291",
+            "title": "Common Emacs Lisp Functions",
+            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html"
+          },
+          "sourceName": "bookmarks"
+        },
+        {
+          "title": "Learn #Emacs Lisp in 15 minutes",
+          "details": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
+          "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
+          "bookmark": {
+            "dateAdded": 1375040342597,
+            "id": "350",
+            "index": 23,
+            "parentId": "291",
+            "title": "Learn #Emacs Lisp in 15 minutes",
+            "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html"
+          },
+          "sourceName": "bookmarks"
+        },
+        {
+          "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
+          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "bookmark": {
+            "dateAdded": 1377885838175,
+            "id": "358",
+            "index": 31,
+            "parentId": "291",
+            "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
+            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html"
+          },
+          "sourceName": "bookmarks"
         }
       ]
     },
@@ -55,28 +217,67 @@
       "displayedName": "History",
       "candidates": [
         {
-          "title": "Getting Started | React",
-          "url": "https://facebook.github.io/react/docs/getting-started.html",
-          "thumb": "https://facebook.github.io/react/favicon.ico"
+          "title": "Learn Emacs Lisp in 15 minutes",
+          "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+          "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+          "historyItem": {
+            "id": "41551",
+            "lastVisitTime": 1467861758961.5469,
+            "title": "Learn Emacs Lisp in 15 minutes",
+            "typedCount": 0,
+            "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+            "visitCount": 1
+          },
+          "sourceName": "history"
         },
         {
-          "title": "Reusable Components | React",
-          "url": "https://facebook.github.io/react/docs/reusable-components.html",
-          "thumb": "https://facebook.github.io/react/favicon.ico"
+          "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+          "historyItem": {
+            "id": "509",
+            "lastVisitTime": 1467861757362.998,
+            "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+            "typedCount": 0,
+            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "visitCount": 1
+          },
+          "sourceName": "history"
         },
         {
-          "title": "Configuring web-mode with JSX · Prathamesh Sonpatki",
-          "url": "http://cha1tanya.com/2015/06/20/configuring-web-mode-with-jsx.html",
-          "thumb": "http://cha1tanya.com/public/favicon.ico"
+          "title": "Common Emacs Lisp Functions",
+          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+          "historyItem": {
+            "id": "500",
+            "lastVisitTime": 1467861756907.409,
+            "title": "Common Emacs Lisp Functions",
+            "typedCount": 0,
+            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "visitCount": 1
+          },
+          "sourceName": "history"
+        },
+        {
+          "title": "Emacs Lisp: Interactive Command Idioms",
+          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+          "historyItem": {
+            "id": "498",
+            "lastVisitTime": 1467861756852.656,
+            "title": "Emacs Lisp: Interactive Command Idioms",
+            "typedCount": 0,
+            "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "visitCount": 1
+          },
+          "sourceName": "history"
         }
       ]
     }
   },
   "cursor": {
     "sourceName": "tabs",
-    "index": 1
+    "index": 0
   },
-  "multiSelections": {
-    "history": { "1": true, "2": true }
-  }
+  "multiSelections": {}
 }

@@ -4,7 +4,10 @@ import Root from './containers/Root';
 import createStore from './store/configureStore';
 import { state00 } from './fixtures/states';
 
+const initialState = state00;
+const store = createStore(initialState);
+
 ReactDOM.render(
-  <Root store = {createStore(state00)} />,
+  <Root store = { store } />,
   document.querySelector('#root')
 );

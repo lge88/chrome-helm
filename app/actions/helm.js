@@ -16,7 +16,7 @@ export function search(query) {
   };
 }
 
-export function selectSession(sessionName) {
+export function selectSession(sessionName, callback) {
   return (dispatch, getState) => {
     dispatch({ type: types.UPDATE_LOADING, isLoading: true });
     helm.getOrCreateSession(sessionName, (session) => {
@@ -36,6 +36,7 @@ export function selectSession(sessionName) {
         const { sourceName, displayedName, candidates } = searchResult;
         dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
         dispatch({ type: types.UPDATE_LOADING, isLoading: false });
+        if (typeof callback === 'function') callback();
       });
     });
   };

@@ -15,7 +15,7 @@ export class GoogleSuggestSource {
   static displayedName = 'Google Sugguest';
 
   static defaultOptions = {
-    limit: 10,
+    limit: 5,
     suggestEndpoint: 'http://www.google.com/complete/search?output=toolbar&q=',
     searchEndpoint: 'https://www.google.com/search?q='
   };

@@ -9,22 +9,19 @@ import * as HelmActions from '../actions/helm';
 
 class App extends Component {
   componentDidMount() {
-    // this.props.actions.search('');
-    this.props.actions.selectSession('findWebPage');
-    // this.props.actions.selectSession('findTab');
-    // this.props.actions.loadState('state03');
+    this.props.actions.selectSession('findWebPage', () => {
+      // this.props.actions.loadState('state01');
+    });
   }
 
-  render() {
+  renderItemSelection() {
     const {
       query,
       isLoading,
-      currentSessionDisplayedName,
       sourceNames,
       resultsBySourceName,
       cursor,
       multiSelections,
-      keyMap,
       actions
     } = this.props;
 
@@ -36,9 +33,8 @@ class App extends Component {
       quitHelmSession: actions.quitHelmSession
     };
 
-    document.title = `Helm Session: ${currentSessionDisplayedName}`;
     return (
-      <HotKeys keyMap = { keyMap } handlers = { handlers }>
+      <HotKeys handlers = { handlers }>
         <div>
           <SearchBox
               query = { query }
@@ -52,6 +48,20 @@ class App extends Component {
               multiSelections = { multiSelections }
           />
         </div>
+      </HotKeys>
+    );
+  }
+
+  render() {
+    const {
+      currentSessionDisplayedName,
+      keyMap
+    } = this.props;
+
+    document.title = `Helm Session: ${currentSessionDisplayedName}`;
+    return (
+      <HotKeys keyMap = { keyMap }>
+        { this.renderItemSelection() }
       </HotKeys>
     );
   }

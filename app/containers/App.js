@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { HotKeys } from 'react-hotkeys';
 
-import SearchBox from '../components/SearchBox';
-import SourceList from '../components/SourceList';
+import ItemSelection from '../components/ItemSelection';
 import * as HelmActions from '../actions/helm';
 
 class App extends Component {
@@ -38,19 +37,15 @@ class App extends Component {
 
     return (
       <HotKeys handlers = { handlers }>
-        <div>
-          <SearchBox
-              query = { query }
-              isLoading = { isLoading }
-              onChange = { actions.search }
-          />
-          <SourceList
-              sourceNames = { sourceNames }
-              resultsBySourceName = { resultsBySourceName }
-              cursor = { cursor }
-              multiSelections = { multiSelections }
-          />
-        </div>
+        <ItemSelection
+            isLoading = { isLoading }
+            query = { query }
+            sourceNames = { sourceNames }
+            resultsBySourceName = { resultsBySourceName }
+            cursor = { cursor }
+            multiSelections = { multiSelections }
+            search = { actions.search }
+        />
       </HotKeys>
     );
   }

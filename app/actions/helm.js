@@ -3,7 +3,7 @@ import * as helm from '../helm';
 
 function noop() {}
 
-export function search(query) {
+export function search(query, callback) {
   return (dispatch, getState) => {
     const { isLoading, currentSessionName } = getState();
     if (isLoading) return;
@@ -13,7 +13,7 @@ export function search(query) {
       const { sourceName, displayedName, candidates } = searchResult;
       dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
     };
-    helm.search(currentSessionName, query, {}, onUpdate);
+    helm.search(currentSessionName, query, {}, onUpdate, callback);
   };
 }
 
@@ -77,6 +77,20 @@ function getSelectedCandidates(getState, { enableMultiSelection }) {
   return candidates;
 }
 
+export function resetSearch(callback) {
+  return (dispatch, getState) => {
+    dispatch({ type: types.UPDATE_QUERY, query: '' });
+
+    const { currentSessionName } = getState();
+    const onUpdate = (searchResult) => {
+      const { sourceName, displayedName, candidates } = searchResult;
+      dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
+    };
+
+    helm.search(currentSessionName, '', {}, onUpdate, callback);
+  };
+}
+
 export function runDefaultAction() {
   return (dispatch, getState) => {
     const {
@@ -88,16 +102,9 @@ export function runDefaultAction() {
 
     const candidates = getSelectedCandidates(getState, { enableMultiSelection: true });
 
-    const context = {}, callback = noop;
-    helm.runDefaultAction(currentSessionName, candidates, context, () => {
-      dispatch({ type: types.UPDATE_QUERY, query: '' });
-
-      const { currentSessionName } = getState();
-      helm.search(currentSessionName, '', {}, searchResult => {
-        const { sourceName, displayedName, candidates } = searchResult;
-        dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
-      });
-    });
+    const context = {};
+    const callback = resetSearch(noop).bind(null, dispatch, getState);
+    helm.runDefaultAction(currentSessionName, candidates, context, callback);
   };
 }
 
@@ -134,6 +141,6 @@ export function nextCandidate() {
 }
 
 export function quitHelmSession() {
-  helm.gotoLastFocused();
-  return noop;
+  const callback = helm.gotoLastFocused.bind(helm);
+  return resetSearch(callback);
 }

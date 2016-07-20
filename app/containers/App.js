@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { HotKeys } from 'react-hotkeys';
 
 import ItemSelection from '../components/ItemSelection';
+import ActionSelection from '../components/ActionSelection';
 import * as HelmActions from '../actions/helm';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
       runPersistentAction: actions.runPersistentAction,
       prevCandidate: actions.prevCandidate,
       nextCandidate: actions.nextCandidate,
+      toggleActionSelection: actions.toggleActionSelection,
       quitHelmSession: actions.quitHelmSession
     };
 
@@ -50,6 +52,39 @@ class App extends Component {
     );
   }
 
+  renderActionSelection() {
+    const {
+      isLoading,
+      actions
+    } = this.props;
+
+    const {
+      query,
+      actions: helmActions,
+      index
+    } = this.props.actionSelection;
+
+    const handlers = {
+      runDefaultAction: actions.runSelectedAction,
+      prevCandidate: actions.prevAction,
+      nextCandidate: actions.nextAction,
+      toggleActionSelection: actions.toggleActionSelection,
+      quitHelmSession: actions.quitHelmSession
+    };
+
+    return (
+      <HotKeys handlers = { handlers }>
+        <ActionSelection
+            isLoading = { isLoading }
+            query = { query }
+            actions = { helmActions }
+            index = { index }
+            search = { actions.filterActions }
+        />
+      </HotKeys>
+    );
+  }
+
   render() {
     const {
       currentSessionDisplayedName,
@@ -60,6 +95,8 @@ class App extends Component {
     let body = null;
     if (mode === 'itemSelection') {
       body = this.renderItemSelection();
+    } else if (mode === 'actionSelection') {
+      body = this.renderActionSelection();
     }
 
     document.title = `Helm Session: ${currentSessionDisplayedName}`;

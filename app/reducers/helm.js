@@ -130,16 +130,13 @@ const actionsMap = {
   },
 
   [ActionTypes.UPDATE_QUERY](state, action) {
-    const { mode } = state;
+    const { itemSelection } = state;
     const { query } = action;
-    const newModeState = { ...state[mode], query };
-    return { ...state, [mode]: newModeState };
+    const newItemSelection = { ...itemSelection, query };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.UPDATE_SOURCE](state, action) {
-    const { mode } = state;
-    if (mode !== 'itemSelection') return state;
-
     const itemSelection = state.itemSelection;
     const { sourceNames } = itemSelection;
     const { sourceName: updatedSourceName, displayedName, candidates } = action;
@@ -164,9 +161,6 @@ const actionsMap = {
   },
 
   [ActionTypes.UPDATE_SESSION](state, action) {
-    const { mode } = state;
-    if (mode !== 'itemSelection') return state;
-
     const { currentSessionName, currentSessionDisplayedName, sourceNames, actions } = action;
     const itemSelection = state.itemSelection;
     const actionSelection = state.actionSelection;
@@ -205,6 +199,31 @@ const actionsMap = {
     const newCursor = cursorHandle.next(cursor);
     const newItemSelection = { ...itemSelection, cursor: newCursor };
     return { ...state, itemSelection: newItemSelection };
+  },
+
+  [ActionTypes.UPDATE_MODE](state, action) {
+    const { mode: newMode } = action;
+    return { ...state, mode: newMode };
+  },
+
+  [ActionTypes.TOGGLE_ACTION_SELECTION](state, action) {
+    const { mode } = state;
+    const newMode = mode === 'actionSelection' ? 'itemSelection' : 'actionSelection';
+    return { ...state, mode: newMode };
+  },
+
+  [ActionTypes.UPDATE_ACTION_QUERY](state, action) {
+    const { actionSelection } = state;
+    const { query } = action;
+    const newActionSelection = { ...actionSelection, query };
+    return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.UPDATE_ACTIONS](state, action) {
+    const { actionSelection } = state;
+    const { actions } = action;
+    const newActionSelection = { ...actionSelection, actions };
+    return { ...state, actionSelection: newActionSelection };
   }
 };
 

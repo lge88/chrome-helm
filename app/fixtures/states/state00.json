@@ -13,6 +13,7 @@
       "ctrl+n",
       "down"
     ],
+    "toggleActionSelection": "tab",
     "quitHelmSession": [
       "ctrl+g",
       "escape"

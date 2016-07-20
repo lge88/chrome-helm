@@ -59,7 +59,6 @@ function getSelectedCandidates(getState, { enableMultiSelection }) {
 
   const state = getState();
   const { mode } = state;
-  if (mode !== 'itemSelection') return candidates;
 
   const  { resultsBySourceName, cursor, multiSelections } = state.itemSelection;
 
@@ -80,13 +79,26 @@ export function resetSearch(callback) {
   return (dispatch, getState) => {
     dispatch({ type: types.UPDATE_QUERY, query: '' });
 
+    let remains = 2;
     const { currentSessionName } = getState();
-    const onUpdate = (searchResult) => {
+
+    const onSearchUpdate = (searchResult) => {
       const { sourceName, displayedName, candidates } = searchResult;
       dispatch({ type: types.UPDATE_SOURCE, sourceName, displayedName, candidates });
     };
+    const onSearchComplete = () => {
+      remains -= 1;
+      if (remains === 0) callback();
+    };
+    helm.search(currentSessionName, '', {}, onSearchUpdate, onSearchComplete);
 
-    helm.search(currentSessionName, '', {}, onUpdate, callback);
+    const onFilterActionComplete = () => {
+      remains -= 1;
+      if (remains === 0) callback();
+    };
+    filterActions('', onFilterActionComplete)(dispatch, getState);
+
+    dispatch({ type: types.UPDATE_MODE, mode: 'itemSelection' });
   };
 }
 
@@ -142,6 +154,44 @@ export function nextCandidate(event) {
     const { isLoading } = getState();
     if (isLoading) return;
     dispatch({ type: types.NEXT_CANDIDATE });
+  };
+}
+
+// Always clear previous action search when toggle.
+export function toggleActionSelection(event) {
+  if (event.preventDefault) event.preventDefault();
+
+  return (dispatch, getState) => {
+    const query = '';
+    dispatch({ type: types.UPDATE_ACTION_QUERY, query });
+    filterActions(query, () => dispatch({ type: types.TOGGLE_ACTION_SELECTION }))(dispatch, getState);
+  };
+}
+
+export function filterActions(query, callback) {
+  return (dispatch, getState) => {
+    const candidates = getSelectedCandidates(getState, { enableMultiSelection: true });
+    const { currentSessionName } = getState();
+
+    dispatch({ type: types.UPDATE_ACTION_QUERY, query });
+
+    const onComplete = (actions) => {
+      dispatch({ type: types.UPDATE_ACTIONS, actions });
+      if (typeof callback === 'function') callback();
+    };
+    helm.getFilteredActions(currentSessionName, query, candidates, onComplete);
+  };
+}
+
+export function runSelectedAction(callback) {
+  return (dispatch, getState) => {
+    const { actionSelection, currentSessionName } = getState();
+    const { actions, index } = actionSelection;
+    const selectedAction = actions[index];
+    const candidates = getSelectedCandidates(getState, { enableMultiSelection: true });
+    const context = {};
+    const onComplete = resetSearch(callback).bind(null, dispatch, getState);
+    helm.runAction(currentSessionName, selectedAction.name, candidates, context, onComplete);
   };
 }
 

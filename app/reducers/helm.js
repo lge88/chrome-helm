@@ -224,6 +224,22 @@ const actionsMap = {
     const { actions } = action;
     const newActionSelection = { ...actionSelection, actions };
     return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.PREV_ACTION](state, action) {
+    const { actionSelection } = state;
+    const { index } = actionSelection;
+    const newIndex = index - 1 >= 0 ? index - 1 : index;
+    const newActionSelection = { ...actionSelection, index: newIndex };
+    return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.NEXT_ACTION](state, action) {
+    const { actionSelection } = state;
+    const { actions, index } = actionSelection;
+    const newIndex = index + 1 < actions.length ? index + 1 : index;
+    const newActionSelection = { ...actionSelection, index: newIndex };
+    return { ...state, actionSelection: newActionSelection };
   }
 };
 

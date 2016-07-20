@@ -157,6 +157,26 @@ export function nextCandidate(event) {
   };
 }
 
+export function prevAction(event) {
+  if (event.preventDefault) event.preventDefault();
+
+  return (dispatch, getState) => {
+    const { isLoading } = getState();
+    if (isLoading) return;
+    dispatch({ type: types.PREV_ACTION });
+  };
+}
+
+export function nextAction(event) {
+  if (event.preventDefault) event.preventDefault();
+
+  return (dispatch, getState) => {
+    const { isLoading } = getState();
+    if (isLoading) return;
+    dispatch({ type: types.NEXT_ACTION });
+  };
+}
+
 // Always clear previous action search when toggle.
 export function toggleActionSelection(event) {
   if (event.preventDefault) event.preventDefault();

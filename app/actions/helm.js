@@ -208,6 +208,8 @@ export function runSelectedAction(callback) {
     const { actionSelection, currentSessionName } = getState();
     const { actions, index } = actionSelection;
     const selectedAction = actions[index];
+    if (!selectedAction) return;
+
     const candidates = getSelectedCandidates(getState, { enableMultiSelection: true });
     const context = {};
     const onComplete = resetSearch(callback).bind(null, dispatch, getState);

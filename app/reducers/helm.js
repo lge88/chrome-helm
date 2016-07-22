@@ -222,7 +222,7 @@ const actionsMap = {
   [ActionTypes.UPDATE_ACTIONS](state, action) {
     const { actionSelection } = state;
     const { actions } = action;
-    const newActionSelection = { ...actionSelection, actions };
+    const newActionSelection = { ...actionSelection, actions, index: 0 };
     return { ...state, actionSelection: newActionSelection };
   },
 

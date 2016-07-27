@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import CandidateItem from './CandidateItem';
+import CandidateCell from './CandidateCell';
 import style from './CandidateGroup.css';
 
 export default class CandidateGroup extends Component {
@@ -10,7 +10,7 @@ export default class CandidateGroup extends Component {
       const candidate = candidates[i];
       const key = name + '-' + i;
       els.push(
-        <CandidateItem
+        <CandidateCell
             key = { key }
             selected = { selectedIndex === i }
             marked = { !!(markedIndexMap && markedIndexMap[i]) }

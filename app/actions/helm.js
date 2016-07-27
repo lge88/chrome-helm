@@ -88,13 +88,13 @@ export function resetSearch(callback) {
     };
     const onSearchComplete = () => {
       remains -= 1;
-      if (remains === 0) callback();
+      if (remains === 0 && typeof callback === 'function') callback();
     };
     helm.search(currentSessionName, '', {}, onSearchUpdate, onSearchComplete);
 
     const onFilterActionComplete = () => {
       remains -= 1;
-      if (remains === 0) callback();
+      if (remains === 0 && typeof callback === 'function') callback();
     };
     filterActions('', onFilterActionComplete)(dispatch, getState);
 

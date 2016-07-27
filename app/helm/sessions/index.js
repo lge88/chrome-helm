@@ -9,6 +9,7 @@ export const findWebPage = {
     'findWebPageInNewWindow',
     'addToBookmarks',
     'removeFromBookmarks',
+    'closeTab',
   ],
   defaultAction: 'findWebPage',
   persistentAction: 'displayWebPage',

@@ -3,8 +3,10 @@ function createBookmarkCandidate(bookmark) {
     title: bookmark.title,
     details: bookmark.url,
     url: bookmark.url,
-    bookmark: bookmark,
-    sourceName: 'bookmarks'
+    sourceName: 'bookmarks',
+    bookmark: {
+      id: bookmark.id
+    }
   };
 }
 

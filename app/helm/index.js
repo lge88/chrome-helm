@@ -7,7 +7,7 @@ function getSessionInfo(session) {
     sessionName: session.getName(),
     sessionDisplayedName: session.getDisplayedName(),
     sourceNames: session.getSourceNames(),
-    actionNames: session.getActionNames()
+    actions: session.getActions()
   };
 }
 
@@ -31,24 +31,25 @@ export function getOrCreateSession(sessionName, callback) {
   window.HelmSession = session;
 }
 
-export function search(sessionName, query, options, onUpdate) {
+export function search(sessionName, query, options, onUpdate, onComplete) {
   const session = sessions[sessionName];
   if (session) {
-    session.search(query, options, onUpdate);
+    session.search(query, options, onUpdate, onComplete);
   }
 }
 
-export function getActionCandidates(sessionName, selectedCandidate, markedCandidates, callback) {
+export function getFilteredActions(sessionName, query, candidates, callback) {
   const session = sessions[sessionName];
   if (session) {
-    session.getActionCandidates(selectedCandidate, markedCandidates, callback);
+    session.getFilteredActions(query, candidates, callback);
   }
 }
 
-export function runAction(sessionName, actionIndex, candidates, context, callback) {
+export function runAction(sessionName, actionName, candidates, context, callback) {
   const session = sessions[sessionName];
   if (session) {
-    session.runAction(actionIndex, candidates, context, callback);
+    const contenxt = {};
+    session.runAction(actionName, candidates, context, callback);
   }
 }
 

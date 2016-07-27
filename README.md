@@ -9,7 +9,7 @@ chrome-helm is inspired by emacs plugin helm https://github.com/emacs-helm/helm.
 A helm candidate is an object representing the item to find. The following attributes will be used to render the UI:
 - `title: String` (required)
 - `thumb: String` (optional): An icon url.
-- `detail: String` (optional)
+- `details: String` (optional)
 
 A candidate must also present:
 - `source: String` (required): The name of source (consistent with `Source::getName()`) that generates this candidate.
@@ -19,7 +19,7 @@ Other than above attributes, a candidate can cantain other optional data fields 
 {
   "title": "GitHub",
   "thumb": "https://github.global.ssl.fastly.net/favicon.ico",
-  "detail": "https://github.com/",
+  "details": "https://github.com/",
   "source": "bookmarks",
   "created_time": 1468085042
 }
@@ -52,9 +52,11 @@ A helm action can be applied on a list of candidates. All helm actions is placed
 #### `name: String` (required)
 Unique. It will be used as key in a dictionary.
 
-#### `displayedName: String` (optional)
+#### `title: String` (optional)
+Used in UI.
 
-#### `description: String` (optional)
+#### `details: String` (optional)
+Used in UI.
 
 #### `run(candidates: [Candidate], context: Object, callback: Function)` (required)
 `context` is an empty object for now. Might be used to pass extra info in the future.

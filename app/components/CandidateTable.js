@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import CandidateGroup from './CandidateGroup';
+import CandidateList from './CandidateList';
 
-export default class SourceList extends Component {
-  renderCandidateGroups() {
+export default class CandidateTable extends Component {
+  renderCandidateLists() {
     const {
       cursor,
       multiSelections,
@@ -28,7 +28,7 @@ export default class SourceList extends Component {
       const { displayedName, candidates } = results;
       if (candidates.length > 0) {
         elements.push(
-          <CandidateGroup
+          <CandidateList
               key = { sourceName }
               name = { displayedName }
               candidates = { candidates }
@@ -47,7 +47,7 @@ export default class SourceList extends Component {
   render() {
     return (
       <div>
-        { this.renderCandidateGroups() }
+        { this.renderCandidateLists() }
       </div>
     );
   }

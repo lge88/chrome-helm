@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { HotKeys } from 'react-hotkeys';
 
-import SearchBox from '../components/SearchBox';
-import SourceList from '../components/SourceList';
+import ItemSelection from '../components/ItemSelection';
+import ActionSelection from '../components/ActionSelection';
 import * as HelmActions from '../actions/helm';
 
 class App extends Component {
@@ -16,38 +16,71 @@ class App extends Component {
 
   renderItemSelection() {
     const {
-      query,
       isLoading,
+      actions
+    } = this.props;
+
+    const {
+      query,
       sourceNames,
       resultsBySourceName,
       cursor,
-      multiSelections,
-      actions
-    } = this.props;
+      multiSelections
+    } = this.props.itemSelection;
 
     const handlers = {
       runDefaultAction: actions.runDefaultAction,
       runPersistentAction: actions.runPersistentAction,
       prevCandidate: actions.prevCandidate,
       nextCandidate: actions.nextCandidate,
+      toggleActionSelection: actions.toggleActionSelection,
       quitHelmSession: actions.quitHelmSession
     };
 
     return (
       <HotKeys handlers = { handlers }>
-        <div>
-          <SearchBox
-              query = { query }
-              isLoading = { isLoading }
-              onChange = { actions.search }
-          />
-          <SourceList
-              sourceNames = { sourceNames }
-              resultsBySourceName = { resultsBySourceName }
-              cursor = { cursor }
-              multiSelections = { multiSelections }
-          />
-        </div>
+        <ItemSelection
+            isLoading = { isLoading }
+            query = { query }
+            sourceNames = { sourceNames }
+            resultsBySourceName = { resultsBySourceName }
+            cursor = { cursor }
+            multiSelections = { multiSelections }
+            search = { actions.search }
+        />
+      </HotKeys>
+    );
+  }
+
+  renderActionSelection() {
+    const {
+      isLoading,
+      actions
+    } = this.props;
+
+    const {
+      query,
+      actions: helmActions,
+      index
+    } = this.props.actionSelection;
+
+    const handlers = {
+      runDefaultAction: actions.runSelectedAction,
+      prevCandidate: actions.prevAction,
+      nextCandidate: actions.nextAction,
+      toggleActionSelection: actions.toggleActionSelection,
+      quitHelmSession: actions.quitHelmSession
+    };
+
+    return (
+      <HotKeys handlers = { handlers }>
+        <ActionSelection
+            isLoading = { isLoading }
+            query = { query }
+            actions = { helmActions }
+            index = { index }
+            search = { actions.filterActions }
+        />
       </HotKeys>
     );
   }
@@ -55,13 +88,21 @@ class App extends Component {
   render() {
     const {
       currentSessionDisplayedName,
-      keyMap
+      keyMap,
+      mode
     } = this.props;
+
+    let body = null;
+    if (mode === 'itemSelection') {
+      body = this.renderItemSelection();
+    } else if (mode === 'actionSelection') {
+      body = this.renderActionSelection();
+    }
 
     document.title = `Helm Session: ${currentSessionDisplayedName}`;
     return (
       <HotKeys keyMap = { keyMap }>
-        { this.renderItemSelection() }
+        { body !== null && body }
       </HotKeys>
     );
   }
@@ -72,15 +113,6 @@ export default connect(
   dispatch => {
     const actions = bindActionCreators(HelmActions, dispatch);
     window.HelmActions = actions;
-
-    chrome.windows.getCurrent({}, (win) => {
-      chrome.windows.onFocusChanged.addListener((winId) => {
-        if (winId === win.id) {
-          // actions.search('');
-        }
-      });
-    });
-
     return { actions };
   }
 )(App);

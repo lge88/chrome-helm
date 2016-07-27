@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
-import style from './CandidateItem.css';
+import style from './CandidateCell.css';
 import classnames from 'classnames';
 
 const itemHeight = 30;
 const thumbWidthPercent = 6;
 
-class CandidateItem extends Component {
+class CandidateCell extends Component {
   render() {
     const {
       selected,
@@ -40,4 +40,4 @@ class CandidateItem extends Component {
   }
 }
 
-export default CandidateItem;
+export default CandidateCell;

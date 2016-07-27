@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import CandidateItem from './CandidateItem';
-import style from './CandidateGroup.css';
+import CandidateCell from './CandidateCell';
+import style from './CandidateList.css';
 
-export default class CandidateGroup extends Component {
+export default class CandidateList extends Component {
   renderCandidates() {
     const { name, selectedIndex, markedIndexMap, candidates, limit } = this.props;
     let els = [];
@@ -10,7 +10,7 @@ export default class CandidateGroup extends Component {
       const candidate = candidates[i];
       const key = name + '-' + i;
       els.push(
-        <CandidateItem
+        <CandidateCell
             key = { key }
             selected = { selectedIndex === i }
             marked = { !!(markedIndexMap && markedIndexMap[i]) }

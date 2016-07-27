@@ -1,5 +1,6 @@
 import { sources } from '../sources';
 import { actions } from '../actions';
+import { AttributeMatcher } from '../../utils/AttributeMatcher';
 
 export class Session {
   constructor(options) {
@@ -24,6 +25,7 @@ export class Session {
 
     // TODO: Create actions
     // TODO: pass options to source
+    this._actionMatcher = new AttributeMatcher([ 'title', 'details' ]);
     this._actions = actionNames.map(name => actions[name]);
     this._defaultAction = actions[defaultAction];
     this._persistentAction = actions[persistentAction];
@@ -60,27 +62,35 @@ export class Session {
     return this._sources.map(source => source.klass.key);
   }
 
-  getActionNames() {
-    return this._actions.map(action => action.name);
+  getActions() {
+    return this._actions.map(action => ({
+      name: action.name,
+      displayedName: action.displayedName,
+      description: action.description
+    }));
   }
 
-  search(query, options, onUpdate) {
+  search(query, options, onUpdate, onComplete) {
+    let remaining = this._sources.length;
     this._currentQuery = query;
     this._sources.forEach(source => {
       source.instance.search(query, {}, candidates => {
+        remaining -= 1;
         if (this._currentQuery === query) {
           onUpdate({
             sourceName: source.klass.key,
             displayedName: source.klass.displayedName,
             candidates
           });
+          if (remaining === 0 && typeof onComplete === 'function') onComplete();
         }
       });
     });
   }
 
-  getActionCandidates(candidates, callback) {
+  getFilteredActions(query, candidates, callback) {
     let actionCandidates = [];
+    const matcherFilter = this._actionMatcher.test.bind(this._actionMatcher, query);
 
     for (let i = 0, len = this._actions.length; i < len; ++i) {
       const action = this._actions[i];
@@ -88,21 +98,30 @@ export class Session {
       if (typeof action.canRun === 'function') {
         canRun = action.canRun(candidates);
       }
-      if (!canRun) continue;
 
-      actionCandidates.push({
-        title: action.displayedName || action.name,
-        description: action.description,
-        actionIndex: i
-      });
+      if (canRun && matcherFilter(action)) {
+        actionCandidates.push({
+          name: action.name,
+          title: action.title || action.name,
+          details: action.details
+        });
+      }
     }
 
     return callback(actionCandidates);
   }
 
-  runAction(actionIndex, candidates, context, callback) {
-    const action = this._actions[actionIndex];
-    if (!action) return callback(`Can not find action with index ${actionIndex}`);
+  getActionByName(actionName) {
+    for (let i = 0, len = this._actions.length; i < len; ++i) {
+      const action = this._actions[i];
+      if (action.name === actionName) return action;
+    }
+    return null;
+  }
+
+  runAction(actionName, candidates, context, callback) {
+    const action = this.getActionByName(actionName);
+    if (!action) return callback(`Can not find action with name ${actionName}`);
 
     if (typeof action.canRun === 'function') {
       if (!action.canRun(candidates)) {
@@ -110,6 +129,7 @@ export class Session {
       }
     }
 
+    if (typeof callback !== 'function') callback = () => {};
     return action.run(candidates, context, callback);
   }
 

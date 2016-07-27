@@ -130,14 +130,17 @@ const actionsMap = {
   },
 
   [ActionTypes.UPDATE_QUERY](state, action) {
+    const { itemSelection } = state;
     const { query } = action;
-    return { ...state, query };
+    const newItemSelection = { ...itemSelection, query };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.UPDATE_SOURCE](state, action) {
-    const { sourceNames } = state;
+    const itemSelection = state.itemSelection;
+    const { sourceNames } = itemSelection;
     const { sourceName: updatedSourceName, displayedName, candidates } = action;
-    let { resultsBySourceName, cursor } = state;
+    let { resultsBySourceName, cursor } = itemSelection;
 
     // Update results
     resultsBySourceName = clone(resultsBySourceName);
@@ -153,27 +156,90 @@ const actionsMap = {
     }
 
     // TODO: update multi selection
-
-    return { ...state, resultsBySourceName, cursor };
+    const newItemSelection = { ...itemSelection, resultsBySourceName, cursor };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.UPDATE_SESSION](state, action) {
-    const { currentSessionName, currentSessionDisplayedName, sourceNames } = action;
-    return { ...state, currentSessionName, currentSessionDisplayedName, sourceNames };
+    const { currentSessionName, currentSessionDisplayedName, sourceNames, actions } = action;
+    const itemSelection = state.itemSelection;
+    const actionSelection = state.actionSelection;
+
+    // TODO: handle action names
+    const newItemSelection = { ...itemSelection, sourceNames };
+    const newActionSelection = { ...actionSelection, actions };
+    return {
+      ...state,
+      currentSessionName,
+      currentSessionDisplayedName,
+      itemSelection: newItemSelection,
+      actionSelection: newActionSelection
+    };
   },
 
   [ActionTypes.PREV_CANDIDATE](state, action) {
-    const { sourceNames, resultsBySourceName, cursor } = state;
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const itemSelection = state.itemSelection;
+    const { sourceNames, resultsBySourceName, cursor } = itemSelection;
     cursorHandle.reset(sourceNames, resultsBySourceName);
     const newCursor = cursorHandle.prev(cursor);
-    return { ...state, cursor: newCursor };
+    const newItemSelection = { ...itemSelection, cursor: newCursor };
+    return { ...state, itemSelection: newItemSelection };
   },
 
   [ActionTypes.NEXT_CANDIDATE](state, action) {
-    const { sourceNames, resultsBySourceName, cursor } = state;
+    const { mode } = state;
+    if (mode !== 'itemSelection') return state;
+
+    const itemSelection = state.itemSelection;
+    const { sourceNames, resultsBySourceName, cursor } = itemSelection;
     cursorHandle.reset(sourceNames, resultsBySourceName);
     const newCursor = cursorHandle.next(cursor);
-    return { ...state, cursor: newCursor };
+    const newItemSelection = { ...itemSelection, cursor: newCursor };
+    return { ...state, itemSelection: newItemSelection };
+  },
+
+  [ActionTypes.UPDATE_MODE](state, action) {
+    const { mode: newMode } = action;
+    return { ...state, mode: newMode };
+  },
+
+  [ActionTypes.TOGGLE_ACTION_SELECTION](state, action) {
+    const { mode } = state;
+    const newMode = mode === 'actionSelection' ? 'itemSelection' : 'actionSelection';
+    return { ...state, mode: newMode };
+  },
+
+  [ActionTypes.UPDATE_ACTION_QUERY](state, action) {
+    const { actionSelection } = state;
+    const { query } = action;
+    const newActionSelection = { ...actionSelection, query };
+    return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.UPDATE_ACTIONS](state, action) {
+    const { actionSelection } = state;
+    const { actions } = action;
+    const newActionSelection = { ...actionSelection, actions, index: 0 };
+    return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.PREV_ACTION](state, action) {
+    const { actionSelection } = state;
+    const { index } = actionSelection;
+    const newIndex = index - 1 >= 0 ? index - 1 : index;
+    const newActionSelection = { ...actionSelection, index: newIndex };
+    return { ...state, actionSelection: newActionSelection };
+  },
+
+  [ActionTypes.NEXT_ACTION](state, action) {
+    const { actionSelection } = state;
+    const { actions, index } = actionSelection;
+    const newIndex = index + 1 < actions.length ? index + 1 : index;
+    const newActionSelection = { ...actionSelection, index: newIndex };
+    return { ...state, actionSelection: newActionSelection };
   }
 };
 

@@ -2,7 +2,6 @@
   "currentSessionName": "findWebPage",
   "currentSessionDisplayedName": "Find web page",
   "isLoading": false,
-  "query": "emacs lisp",
   "keyMap": {
     "runDefaultAction": "enter",
     "runPersistentAction": "ctrl+j",
@@ -14,270 +13,280 @@
       "ctrl+n",
       "down"
     ],
+    "toggleActionSelection": "tab",
     "quitHelmSession": [
       "ctrl+g",
       "escape"
     ]
   },
-  "sourceNames": [
-    "tabs",
-    "bookmarks",
-    "history",
-    "googleSuggest",
-    "webSearch"
-  ],
-  "resultsBySourceName": {
-    "googleSuggest": {
-      "displayedName": "Google Sugguest",
-      "candidates": [
-        {
-          "title": "emacs lisp",
-          "url": "https://www.google.com/search?q=emacs%20lisp"
-        },
-        {
-          "title": "emacs lisp tutorial",
-          "url": "https://www.google.com/search?q=emacs%20lisp%20tutorial"
-        },
-        {
-          "title": "emacs lisp let",
-          "url": "https://www.google.com/search?q=emacs%20lisp%20let"
-        },
-        {
-          "title": "emacs lisp print",
-          "url": "https://www.google.com/search?q=emacs%20lisp%20print"
-        },
-        {
-          "title": "emacs lisp print variable",
-          "url": "https://www.google.com/search?q=emacs%20lisp%20print%20variable"
-        },
-        {
-          "title": "emacs lisp cond",
-          "url": "https://www.google.com/search?q=emacs%20lisp%20cond"
-        }
-      ]
-    },
-    "webSearch": {
-      "displayedName": "Search Web",
-      "candidates": [
-        {
-          "title": "emacs lisp",
-          "url": "https://www.google.com/search?q=emacs%20lisp"
-        }
-      ]
-    },
-    "tabs": {
-      "displayedName": "Browser Tabs",
-      "candidates": [
-        {
-          "thumb": "http://ergoemacs.org/favicon.ico",
-          "title": "Emacs Lisp: Interactive Command Idioms",
-          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "sourceName": "tabs",
-          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "tab": {
-            "windowId": 1,
-            "id": 497
+  "mode": "itemSelection",
+  "itemSelection": {
+    "query": "emacs lisp",
+    "sourceNames": [
+      "tabs",
+      "bookmarks",
+      "history",
+      "googleSuggest",
+      "webSearch"
+    ],
+    "resultsBySourceName": {
+      "googleSuggest": {
+        "displayedName": "Google Sugguest",
+        "candidates": [
+          {
+            "title": "emacs lisp",
+            "url": "https://www.google.com/search?q=emacs%20lisp"
+          },
+          {
+            "title": "emacs lisp tutorial",
+            "url": "https://www.google.com/search?q=emacs%20lisp%20tutorial"
+          },
+          {
+            "title": "emacs lisp let",
+            "url": "https://www.google.com/search?q=emacs%20lisp%20let"
+          },
+          {
+            "title": "emacs lisp print",
+            "url": "https://www.google.com/search?q=emacs%20lisp%20print"
+          },
+          {
+            "title": "emacs lisp print variable",
+            "url": "https://www.google.com/search?q=emacs%20lisp%20print%20variable"
+          },
+          {
+            "title": "emacs lisp cond",
+            "url": "https://www.google.com/search?q=emacs%20lisp%20cond"
           }
-        },
-        {
-          "thumb": "https://www.emacswiki.org/favicon.ico",
-          "title": "EmacsWiki: Elisp Cookbook",
-          "details": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
-          "sourceName": "tabs",
-          "url": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
-          "tab": {
-            "windowId": 1,
-            "id": 499
+        ]
+      },
+      "webSearch": {
+        "displayedName": "Search Web",
+        "candidates": [
+          {
+            "title": "emacs lisp",
+            "url": "https://www.google.com/search?q=emacs%20lisp"
           }
-        },
-        {
-          "thumb": "http://ergoemacs.org/favicon.ico",
-          "title": "Common Emacs Lisp Functions",
-          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "sourceName": "tabs",
-          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "tab": {
-            "windowId": 1,
-            "id": 501
-          }
-        },
-        {
-          "title": "Learn Emacs Lisp in 15 minutes",
-          "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
-          "sourceName": "tabs",
-          "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
-          "tab": {
-            "windowId": 1,
-            "id": 511
-          }
-        },
-        {
-          "thumb": "http://www.gnu.org/graphics/gnu-head-mini.png",
-          "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
-          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "sourceName": "tabs",
-          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "tab": {
-            "windowId": 1,
-            "id": 527
-          }
-        }
-      ]
-    },
-    "bookmarks": {
-      "displayedName": "Bookmarks",
-      "candidates": [
-        {
-          "title": "Emacs: Working with Lines",
-          "details": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
-          "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
-          "bookmark": {
-            "dateAdded": 1367387713277,
-            "id": "390",
-            "index": 13,
-            "parentId": "290",
-            "title": "Emacs: Working with Lines",
-            "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html"
-          },
-          "sourceName": "bookmarks"
-        },
-        {
-          "title": "Emacs Lisp Idioms for Writing Interactive Commands",
-          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "bookmark": {
-            "dateAdded": 1373594592746,
-            "id": "343",
-            "index": 16,
-            "parentId": "291",
-            "title": "Emacs Lisp Idioms for Writing Interactive Commands",
-            "url": "http://ergoemacs.org/emacs/elisp_idioms.html"
-          },
-          "sourceName": "bookmarks"
-        },
-        {
-          "title": "EmacsWiki: Elisp Cookbook",
-          "details": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
-          "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
-          "bookmark": {
-            "dateAdded": 1373598852831,
-            "id": "344",
-            "index": 17,
-            "parentId": "291",
-            "title": "EmacsWiki: Elisp Cookbook",
-            "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4"
-          },
-          "sourceName": "bookmarks"
-        },
-        {
-          "title": "Common Emacs Lisp Functions",
-          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "bookmark": {
-            "dateAdded": 1373615778122,
-            "id": "345",
-            "index": 18,
-            "parentId": "291",
-            "title": "Common Emacs Lisp Functions",
-            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html"
-          },
-          "sourceName": "bookmarks"
-        },
-        {
-          "title": "Learn #Emacs Lisp in 15 minutes",
-          "details": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
-          "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
-          "bookmark": {
-            "dateAdded": 1375040342597,
-            "id": "350",
-            "index": 23,
-            "parentId": "291",
-            "title": "Learn #Emacs Lisp in 15 minutes",
-            "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html"
-          },
-          "sourceName": "bookmarks"
-        },
-        {
-          "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
-          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "bookmark": {
-            "dateAdded": 1377885838175,
-            "id": "358",
-            "index": 31,
-            "parentId": "291",
-            "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
-            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html"
-          },
-          "sourceName": "bookmarks"
-        }
-      ]
-    },
-    "history": {
-      "displayedName": "History",
-      "candidates": [
-        {
-          "title": "Learn Emacs Lisp in 15 minutes",
-          "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
-          "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
-          "historyItem": {
-            "id": "41551",
-            "lastVisitTime": 1467861758961.5469,
-            "title": "Learn Emacs Lisp in 15 minutes",
-            "typedCount": 0,
-            "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
-            "visitCount": 1
-          },
-          "sourceName": "history"
-        },
-        {
-          "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
-          "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-          "historyItem": {
-            "id": "509",
-            "lastVisitTime": 1467861757362.998,
-            "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
-            "typedCount": 0,
-            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
-            "visitCount": 1
-          },
-          "sourceName": "history"
-        },
-        {
-          "title": "Common Emacs Lisp Functions",
-          "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-          "historyItem": {
-            "id": "500",
-            "lastVisitTime": 1467861756907.409,
-            "title": "Common Emacs Lisp Functions",
-            "typedCount": 0,
-            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
-            "visitCount": 1
-          },
-          "sourceName": "history"
-        },
-        {
-          "title": "Emacs Lisp: Interactive Command Idioms",
-          "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
-          "historyItem": {
-            "id": "498",
-            "lastVisitTime": 1467861756852.656,
+        ]
+      },
+      "tabs": {
+        "displayedName": "Browser Tabs",
+        "candidates": [
+          {
+            "thumb": "http://ergoemacs.org/favicon.ico",
             "title": "Emacs Lisp: Interactive Command Idioms",
-            "typedCount": 0,
+            "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "sourceName": "tabs",
             "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
-            "visitCount": 1
+            "tab": {
+              "windowId": 1,
+              "id": 497
+            }
           },
-          "sourceName": "history"
-        }
-      ]
-    }
+          {
+            "thumb": "https://www.emacswiki.org/favicon.ico",
+            "title": "EmacsWiki: Elisp Cookbook",
+            "details": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
+            "sourceName": "tabs",
+            "url": "https://www.emacswiki.org/emacs/ElispCookbook#toc4",
+            "tab": {
+              "windowId": 1,
+              "id": 499
+            }
+          },
+          {
+            "thumb": "http://ergoemacs.org/favicon.ico",
+            "title": "Common Emacs Lisp Functions",
+            "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "sourceName": "tabs",
+            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "tab": {
+              "windowId": 1,
+              "id": 501
+            }
+          },
+          {
+            "title": "Learn Emacs Lisp in 15 minutes",
+            "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+            "sourceName": "tabs",
+            "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+            "tab": {
+              "windowId": 1,
+              "id": 511
+            }
+          },
+          {
+            "thumb": "http://www.gnu.org/graphics/gnu-head-mini.png",
+            "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+            "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "sourceName": "tabs",
+            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "tab": {
+              "windowId": 1,
+              "id": 527
+            }
+          }
+        ]
+      },
+      "bookmarks": {
+        "displayedName": "Bookmarks",
+        "candidates": [
+          {
+            "title": "Emacs: Working with Lines",
+            "details": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
+            "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html",
+            "bookmark": {
+              "dateAdded": 1367387713277,
+              "id": "390",
+              "index": 13,
+              "parentId": "290",
+              "title": "Emacs: Working with Lines",
+              "url": "http://ergoemacs.org/emacs/elisp_list_matching_lines.html"
+            },
+            "sourceName": "bookmarks"
+          },
+          {
+            "title": "Emacs Lisp Idioms for Writing Interactive Commands",
+            "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "bookmark": {
+              "dateAdded": 1373594592746,
+              "id": "343",
+              "index": 16,
+              "parentId": "291",
+              "title": "Emacs Lisp Idioms for Writing Interactive Commands",
+              "url": "http://ergoemacs.org/emacs/elisp_idioms.html"
+            },
+            "sourceName": "bookmarks"
+          },
+          {
+            "title": "EmacsWiki: Elisp Cookbook",
+            "details": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
+            "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4",
+            "bookmark": {
+              "dateAdded": 1373598852831,
+              "id": "344",
+              "index": 17,
+              "parentId": "291",
+              "title": "EmacsWiki: Elisp Cookbook",
+              "url": "http://www.emacswiki.org/emacs/ElispCookbook#toc4"
+            },
+            "sourceName": "bookmarks"
+          },
+          {
+            "title": "Common Emacs Lisp Functions",
+            "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "bookmark": {
+              "dateAdded": 1373615778122,
+              "id": "345",
+              "index": 18,
+              "parentId": "291",
+              "title": "Common Emacs Lisp Functions",
+              "url": "http://ergoemacs.org/emacs/elisp_common_functions.html"
+            },
+            "sourceName": "bookmarks"
+          },
+          {
+            "title": "Learn #Emacs Lisp in 15 minutes",
+            "details": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
+            "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html",
+            "bookmark": {
+              "dateAdded": 1375040342597,
+              "id": "350",
+              "index": 23,
+              "parentId": "291",
+              "title": "Learn #Emacs Lisp in 15 minutes",
+              "url": "http://bzg.fr/learn-emacs-lisp-in-15-minutes.html"
+            },
+            "sourceName": "bookmarks"
+          },
+          {
+            "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
+            "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "bookmark": {
+              "dateAdded": 1377885838175,
+              "id": "358",
+              "index": 31,
+              "parentId": "291",
+              "title": "Interactive Codes - GNU Emacs Lisp Reference Manual",
+              "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html"
+            },
+            "sourceName": "bookmarks"
+          }
+        ]
+      },
+      "history": {
+        "displayedName": "History",
+        "candidates": [
+          {
+            "title": "Learn Emacs Lisp in 15 minutes",
+            "details": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+            "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+            "historyItem": {
+              "id": "41551",
+              "lastVisitTime": 1467861758961.5469,
+              "title": "Learn Emacs Lisp in 15 minutes",
+              "typedCount": 0,
+              "url": "http://emacs-doctor.com/learn-emacs-lisp-in-15-minutes.html",
+              "visitCount": 1
+            },
+            "sourceName": "history"
+          },
+          {
+            "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+            "details": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+            "historyItem": {
+              "id": "509",
+              "lastVisitTime": 1467861757362.998,
+              "title": "GNU Emacs Lisp Reference Manual: Interactive Codes",
+              "typedCount": 0,
+              "url": "http://www.gnu.org/software/emacs/manual/html_node/elisp/Interactive-Codes.html",
+              "visitCount": 1
+            },
+            "sourceName": "history"
+          },
+          {
+            "title": "Common Emacs Lisp Functions",
+            "details": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+            "historyItem": {
+              "id": "500",
+              "lastVisitTime": 1467861756907.409,
+              "title": "Common Emacs Lisp Functions",
+              "typedCount": 0,
+              "url": "http://ergoemacs.org/emacs/elisp_common_functions.html",
+              "visitCount": 1
+            },
+            "sourceName": "history"
+          },
+          {
+            "title": "Emacs Lisp: Interactive Command Idioms",
+            "details": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+            "historyItem": {
+              "id": "498",
+              "lastVisitTime": 1467861756852.656,
+              "title": "Emacs Lisp: Interactive Command Idioms",
+              "typedCount": 0,
+              "url": "http://ergoemacs.org/emacs/elisp_idioms.html",
+              "visitCount": 1
+            },
+            "sourceName": "history"
+          }
+        ]
+      }
+    },
+    "cursor": {
+      "sourceName": "tabs",
+      "index": 0
+    },
+    "multiSelections": {}
   },
-  "cursor": {
-    "sourceName": "tabs",
+  "actionSelection": {
+    "query": "",
+    "actions": [],
     "index": 0
-  },
-  "multiSelections": {}
+  }
 }

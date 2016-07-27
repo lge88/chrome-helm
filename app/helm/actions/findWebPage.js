@@ -1,7 +1,7 @@
 export const findWebPage = {
   name: 'findWebPage',
-  displayedName: 'Find web page.',
-  description: 'Find web page.',
+  title: 'Find web page [ Default ].',
+  // details: 'Find web page [ Default ].',
 
   canRun(candidates) {
     return candidates.length === 1 && candidates[0].url;

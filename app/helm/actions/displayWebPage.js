@@ -20,11 +20,12 @@ function refocusToHelm(callback) {
 
 export const displayWebPage = {
   name: 'displayWebPage',
-  displayedName: 'Display web page.',
-  description: 'Display web page without leaving Helm session.',
+  title: 'Display web page.',
+  details: 'Display web page without leaving Helm session.',
 
+  // So it won't show in action selection UI.
   canRun(candidates) {
-    return candidates.length === 1 && candidates[0].url;
+    return false;
   },
 
   run(candidates, context, callback) {

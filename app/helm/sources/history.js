@@ -3,8 +3,11 @@ function createHistoryCandidate(historyItem) {
     title: historyItem.title,
     details: historyItem.url,
     url: historyItem.url,
-    historyItem: historyItem,
-    sourceName: 'history'
+    sourceName: 'history',
+    history: {
+      lastVisitTime: historyItem.lastVisitTime,
+      visitCount: historyItem.visitCount
+    }
   };
 }
 

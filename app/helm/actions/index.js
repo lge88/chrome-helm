@@ -4,6 +4,7 @@ import { findWebPageInNewWindow } from './findWebPageInNewWindow';
 import { addToBookmarks } from './addToBookmarks';
 import { removeFromBookmarks } from './removeFromBookmarks';
 import { closeTab } from './closeTab';
+import { removeFromHistory } from './removeFromHistory';
 
 export const actions = {
   [findWebPage.name]: findWebPage,
@@ -11,5 +12,6 @@ export const actions = {
   [findWebPageInNewWindow.name]: findWebPageInNewWindow,
   [addToBookmarks.name]: addToBookmarks,
   [removeFromBookmarks.name]: removeFromBookmarks,
-  [closeTab.name]: closeTab
+  [closeTab.name]: closeTab,
+  [removeFromHistory.name]: removeFromHistory
 };

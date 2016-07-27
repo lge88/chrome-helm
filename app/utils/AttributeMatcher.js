@@ -1,4 +1,5 @@
-const whiteSpaceRe = /\s+/;
+const queryTokenDelimRe = /\s+/;
+const attrTokenDelimRe = /[ \t,\-_\/.:]+/;
 
 function escapeRegex(str) {
   return str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&');
@@ -12,12 +13,18 @@ export class AttributeMatcher {
   test(query, candidate) {
     if (query === '') return true;
 
-    const filterToken = (token) => {
-      const tokenNoRegex = escapeRegex(token);
-      const re = new RegExp(tokenNoRegex, "i");
-      return this._attributes.some(attr => candidate[attr] && candidate[attr].search(re) >= 0);
+    const filterToken = (queryToken) => {
+      const queryTokenRe = new RegExp('^' + escapeRegex(queryToken), "i");
+
+      return this._attributes.some((key) => {
+        const attr = candidate[key];
+        if (!attr) return false;
+
+        const attrTokens = attr.split(attrTokenDelimRe);
+        return attrTokens.some((attrToken) => queryTokenRe.test(attrToken));
+      });
     };
 
-    return query.split(whiteSpaceRe).every(filterToken);
+    return query.split(queryTokenDelimRe).every(filterToken);
   }
 }

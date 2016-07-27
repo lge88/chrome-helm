@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import CandidateList from './CandidateList';
 
-export default class SourceList extends Component {
+export default class CandidateTable extends Component {
   renderCandidateLists() {
     const {
       cursor,

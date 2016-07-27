@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import SearchBox from './SearchBox';
-import SourceList from './SourceList';
+import CandidateTable from './CandidateTable';
 
 export default class ActionSelection extends Component {
   static actionSelectionGroupText = 'Select Action';
@@ -36,7 +36,7 @@ export default class ActionSelection extends Component {
             query = { query }
             onChange = { search }
         />
-        <SourceList
+        <CandidateTable
             sourceNames = { sourceNames }
             resultsBySourceName = { resultsBySourceName }
             cursor = { cursor }

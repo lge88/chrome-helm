@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import SearchBox from './SearchBox';
-import SourceList from './SourceList';
+import CandidateTable from './CandidateTable';
 
 export default class ItemSelection extends Component {
   render() {
@@ -24,7 +24,7 @@ export default class ItemSelection extends Component {
             query = { query }
             onChange = { search }
         />
-        <SourceList
+        <CandidateTable
             sourceNames = { sourceNames }
             resultsBySourceName = { resultsBySourceName }
             cursor = { cursor }

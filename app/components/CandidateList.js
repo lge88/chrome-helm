@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import CandidateCell from './CandidateCell';
-import style from './CandidateGroup.css';
+import style from './CandidateList.css';
 
-export default class CandidateGroup extends Component {
+export default class CandidateList extends Component {
   renderCandidates() {
     const { name, selectedIndex, markedIndexMap, candidates, limit } = this.props;
     let els = [];

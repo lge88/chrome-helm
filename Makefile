@@ -1,6 +1,8 @@
 
 build-dev: copy-files-dev webpack-dev
 
+build-prod: copy-files-prod webpack-prod
+
 dev-folder:
 	mkdir -p ./dev
 	rm -fr ./dev/*
